@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geekshubs Travel Company</title>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no">
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light navbar-expand-lg nav-fixed">
+
+    <a class="navbar-brand col-3" href="#">
+        <i class="fas fa-plane" href="#"></i>
+        Geekshubs
+    </a>
+    <button id="menu-toggler" class="navbar-toggler navbar-toggler-right menu-icon" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="navbar-nav navbar-center" id="main-menu">
+
+            <a class="nav-item nav-link" href="#">Viajes<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Ofertas</a>
+            <a class="nav-item nav-link" href="#">¿Quiénes somos?</a>
+            <a class="nav-item nav-link" href="#">¿Dónde estamos?</a>
+            <a class="nav-item nav-link" href="/login">Login</a>
+            <a class="nav-item nav-link" href="/registro">Registro</a>
+
+            <div class="d-flex justify-content-center navbar-brand d-lg-none">
+                <i class="mg-10 fab fa-facebook-f"></i>
+                <i class="mg-10 fab fa-twitter"></i>
+                <i class="mg-10 fab fa-youtube"></i>
+                <i class="mg-10 fab fa-instagram"></i>
+                <i class="mg-10 fab fa-linkedin"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="navbar-brand navbar-rrss col-3 d-none d-lg-block" href="#">
+        <i class="mg-10 fab fa-facebook-f"></i>
+        <i class="mg-10 fab fa-twitter"></i>
+        <i class="mg-10 fab fa-youtube"></i>
+        <i class="mg-10 fab fa-instagram"></i>
+        <i class="mg-10 fab fa-linkedin"></i>
+    </div>
+</nav>
+
+    <header id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner align-items-center">
+            <div class="carousel-item active slider-01">
+                <div class="container carousel-container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="header-title">
+                            <h1>¡Viaja!</h1>
+                            <h6>Descubre lugares maravillosos</h6>
+                        </div>
+                        <div class="header-button">
+                            <h1 class="text-center"><i class="fas fa-plane fa-xs"></i> Ver ofertas</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item slider-02">
+                <div class="container carousel-container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="header-title">
+                            <h1>¡Viaja!</h1>
+                            <h6>Descubre lugares maravillosos</h6>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group input-destinos">
+                                <input type="text" class="form-control" placeholder="¿Dónde quieres viajar?">
+                                <span class="input-group-btn">
+                <button class="btn btn-secondary btn-destinos" type="button">Buscar</button>
+              </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev hidden-resp" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next hidden-resp" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </header>
+
+    <section id="carouselDestinos" class="carousel slide hidden-lg" data-ride="carousel" data-interval="false">
+        <div class="container">
+            <h1>Destinos</h1>
+            <hr>
+        </div>
+        <div class="carousel-inner align-items-center ">
+            <div class="carousel-item active carousel-inner-resp">
+                <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
+                    <div class="shadow h-100 w-100">
+                        <div class="item1-top d-flex justify-content-end">
+                            <div>
+                                <a class="back-heart" >
+                                    <i class="heartt material-icons  material-heart2">favorite</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item-bottom text-dark">
+                            <h3>WASHINGTON</h3>
+                            <hr>
+                            <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-inner-resp">
+                <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
+                    <div class="shadow h-100 w-100">
+                        <div class="item2-top d-flex justify-content-end">
+                            <div>
+                                <a class="back-heart" >
+                                    <i class="heartt material-icons  material-heart2">favorite</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item-bottom text-dark">
+                            <h3>DUBLÍN</h3>
+                            <hr>
+                            <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-inner-resp">
+                <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
+                    <div class="shadow h-100 w-100">
+                        <div class="item3-top d-flex justify-content-end">
+                            <div>
+                                <a class="back-heart" >
+                                    <i class="heartt material-icons  material-heart2">favorite</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item-bottom text-dark">
+                            <h3>PARÍS</h3>
+                            <hr>
+                            <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-inner-resp">
+                <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
+                    <div class="shadow h-100 w-100">
+                        <div class="item4-top d-flex justify-content-end">
+                            <div>
+                                <a class="back-heart" >
+                                    <i class="heartt material-icons  material-heart2">favorite</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item-bottom text-dark">
+                            <h3>PEKÍN</h3>
+                            <hr>
+                            <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev prev-dest" href="#carouselDestinos" role="button" data-slide="prev">
+                <i class="material-icons mi-black">keyboard_arrow_left</i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next next-dest" href="#carouselDestinos" role="button" data-slide="next">
+                <i class="material-icons mi-black">keyboard_arrow_right</i>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="hidden-resp">
+        <div class="wrapper">
+            <div class="container container-destinos">
+                <div class="row d-flex destinos-items">
+                    <div class="col-12 col-md-4 destinos-item is-showing">
+                        <div class="destino destino-paris d-flex justify-content-between">
+                            <div class="price d-flex align-items-center justify-content-center align-self-end">250 &euro;</div>
+                            <a class="back-heart" >
+                                <i class="heartt material-icons  material-heart2">favorite</i>
+                            </a>
+                        </div>
+                        <div class="descripcion-destino">
+                            <p class="type-travell">
+                                <i class="material-icons type">location_on</i>
+                                Romántico
+                            </p>
+                            <h1>París, Francia</h1>
+                            <p>Escapada romántica.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 destinos-item is-showing">
+                        <div class="destino destino-washington d-flex justify-content-between">
+                            <div class="price d-flex align-items-center justify-content-center align-self-end">1.150 &euro;</div>
+                            <a class="back-heart" >
+                                <i class="heartt material-icons  material-heart2">favorite</i>
+                            </a>
+                        </div>
+                        <div class="descripcion-destino">
+                            <p class="type-travell">
+                                <i class="material-icons type">location_on</i>
+                                Histórico
+                            </p>
+                            <h1>Washington, EE.UU.</h1>
+                            <p>Disfruta de un país increible.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 destinos-item is-showing">
+                        <div class="destino destino-irlanda d-flex justify-content-between">
+                            <div class="price d-flex align-items-center justify-content-center align-self-end">250 &euro;</div>
+                            <a class="back-heart" >
+                                <i class="heartt material-icons  material-heart2">favorite</i>
+                            </a>
+                        </div>
+                        <div class="descripcion-destino">
+                            <p class="type-travell">
+                                <i class="material-icons type">location_on</i>
+                                Naturaleza
+                            </p>
+                            <h1>Waterford, Irlanda</h1>
+                            <p>Unas vistas inolvidables.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 destinos-item is-showing">
+                        <div class="destino destino-pekin d-flex justify-content-between">
+                            <div class="price d-flex align-items-center justify-content-center align-self-end">1.650 &euro;</div>
+                            <a class="back-heart" >
+                                <i class="heartt material-icons  material-heart2">favorite</i>
+                            </a>
+                        </div>
+                        <div class="descripcion-destino">
+                            <p class="type-travell">
+                                <i class="material-icons type">location_on</i>
+                                Aventurero
+                            </p>
+                            <h1>Pekín, China</h1>
+                            <p>Un destino milenario.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 destinos-item is-showing">
+                        <div class="destino destino-india d-flex justify-content-between">
+                            <div class="price d-flex align-items-center justify-content-center align-self-end">500 &euro;</div>
+                            <a class="back-heart" >
+                                <i class="heartt material-icons  material-heart2">favorite</i>
+                            </a>
+                        </div>
+                        <div class="descripcion-destino">
+                            <p class="type-travell">
+                                <i class="material-icons type">location_on</i>
+                                Rincones insólitos
+                            </p>
+                            <h1>Agra, India</h1>
+                            <p>Descubre una nueva cultura.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 destinos-item is-showing">
+                        <div class="destino destino-cartagena d-flex justify-content-between">
+                            <div class="price d-flex align-items-center justify-content-center align-self-end">650 &euro;</div>
+                            <a class="back-heart" >
+                                <i class="heartt material-icons  material-heart2">favorite</i>
+                            </a>
+                        </div>
+                        <div class="descripcion-destino">
+                            <p class="type-travell">
+                                <i class="material-icons type">location_on</i>
+                                Histórico
+                            </p>
+                            <h1>Cartagena, Colombia</h1>
+                            <p>Un lugar con mucho color.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="overHidden">
+        <div class="quienes-somos d-flex align-items-center">
+            <div class="container d-flex justify-content-end">
+                <div class="nosotros col-lg-5">
+                    <h1>Sobre nosotros</h1>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur culpa doloribus dolorum, est eveniet facilis hic illo nam nemo nobis optio placeat quaerat quo rerum saepe sed tempore tenetur!</p>
+                    <br>
+                    <p class="hidden-resp">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur culpa doloribus dolorum, est eveniet facilis hic illo nam nemo nobis optio placeat quaerat quo rerum saepe sed tempore tenetur!</p>
+                    <br>
+                    <button type="submit" class="btn btn-custom btn-contact">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div id="contact" class="contact">
+            <div class="container container-destinos">
+                <div class="row d-flex row-contact">
+                    <div class="col-12 col-md-6 form-contact hidden-resp">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.4502350400226!2d-0.358128684734015!3d39.48174697948473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604898947abad3%3A0x5aae0e0b7fa0358a!2sGeeksHubs+Space+Valencia!5e0!3m2!1ses!2ses!4v1520005723384" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-12 col-md-6 form-contact">
+                        <div class="contact-message">
+                            <h3><i class="material-icons mi-center">mail_outline</i> Si tienes alguna duda, escríbenos</h3>
+                        </div>
+                        <hr>
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="hidden-resp" for="inputEmail4">Nombre</label>
+                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="hidden-resp" for="inputPassword4">Correo Electrónico</label>
+                                    <input type="password" class="form-control" id="inputPassword4" placeholder="Correo Electrónico">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="hidden-resp" for="inputEmail4">Teléfono</label>
+                                    <input type="email" class="form-control" id="inputEmail6" placeholder="Teléfono">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="hidden-resp" for="inputPassword4">País</label>
+                                    <input type="password" class="form-control" id="inputPassword6" placeholder="País">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="hidden-resp" for="exampleFormControlTextarea1">Mensaje</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-custom btn-contact">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="w-100 d-flex justify-content-center hidden-lg">
+                        <i class="rrss-resp mg-10 fab fa-facebook-f"></i>
+                        <i class="rrss-resp mg-10 fab fa-twitter"></i>
+                        <i class="rrss-resp mg-10 fab fa-youtube"></i>
+                        <i class="rrss-resp mg-10 fab fa-instagram"></i>
+                        <i class="rrss-resp mg-10 fab fa-linkedin"></i>
+                    </div>
+                    <hr class="hidden-lg">
+                    <div class="col-md-4 d-flex flex-column footer-item">
+                        <h4>¿NECESITAS AYUDA?</h4>
+                        <a>0264 123 4567</a>
+                        <a>enquiry@geekhubstravels.com</a>
+                        <a>Lun-Vie 9:30-19:00 <br> Sab 10:00-14:00</a>
+                    </div>
+                    <div class="col-md-4 d-flex flex-column footer-item">
+                        <h4>INFORMACIÓN</h4>
+                        <a>Quienes somos</a>
+                        <a>Preguntas frecuentes</a>
+                        <a>Politica de privacidad</a>
+                        <a>Condiciones generales</a>
+                        <a>Aviso legal</a>
+                        <a>Contacto</a>
+                        <a>Programa de puntos</a>
+                    </div>
+                    <div class="col-md-4 d-flex  flex-column footer-item">
+                        <h4>SUSCRIBETE A LA NEWSLETTER</h4>
+                        <div class="form-group pt1em">
+                            <input class="form-control" type="email" class="form-control" id="inputEmailSus" placeholder="Correo electrónico">
+                            <button type="submit" class="btn btn-custom btn-contact">Suscribirse</button>
+                        </div>
+                    </div>
+                </div>
+                <hr class="linea">
+                <div class="copyright">
+                    <div class="col-md-12">
+                        <a class="textpeq">Geekhubs Travels &copy; 2018</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a id="totop" class="totop"><i class="material-icons">keyboard_arrow_up</i></a>
+
+    <script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="assets/js/script.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
