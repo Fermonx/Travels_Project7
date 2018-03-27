@@ -1,0 +1,54 @@
+<section>
+    <div id="login" class="login-wrapper d-flex align-items-center">
+        <div class="container container-destinos">
+            <div class="row d-flex justify-content-center row-contact">
+                <div class="col-8 form-login">
+                    <div class="contact-message">
+                        <h3><i class="material-icons mi-center">account_circle</i> LOGIN</h3>
+                    </div>
+                    <hr>
+                    <form>
+                        <div class="mt-5 form-row">
+                            <div class="col-12 offset-md-2 col-md-8 form-group">
+                                <input type="text" class="form-control" id="login-name" placeholder="Nombre">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12 offset-md-2 col-md-8">
+                                <input type="password" class="form-control" id="login-password" placeholder="Correo Electrónico">
+                            </div>
+                        </div>
+                        <button id="login-submit" type="submit" class="col-12 offset-md-2 col-md-4 btn btn-login">Enviar
+                        </button>
+                        <div class="remember-password">
+                            <a class="" data-toggle="modal" data-target="#exampleModalCenter">¿No recuerdas tu contraseña?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    Introduce tu correo electrónico
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <input type="password" class="form-control" id="login-recovery" placeholder="Correo Electrónico">
+                    <button type="button" class="btn btn-primary">Recuperar contraseña</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
