@@ -73,8 +73,8 @@ $('#regbutton').on('click', function () {
     let passwordRegister = $('#regbutton').val();
     let encrypted = CryptoJS.AES.encrypt(passwordRegister, "Secret Passphrase");
     let decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase").toString(CryptoJS.enc.Utf8);
-    alert('Password: ' + decrypted + '\n' + 'Encriptada: ' +encrypted);
-    //if(passwordRegister)
+    //alert('Password: ' + decrypted + '\n' + 'Encriptada: ' +encrypted);
+    if(passwordRegister)
     localStorage.setItem('password', encrypted);
 });
 
