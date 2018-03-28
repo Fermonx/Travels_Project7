@@ -21,9 +21,5 @@ cd project || exit
 git clone https://github.com/Fermonx/actividad_3.git
 fi
 
-if ! [ -L /var/www/html/ ]; then
-sudo rm -rf /var/www/html/
-sudo ln -fs /vagrant /var/www/html
-fi
 
 
