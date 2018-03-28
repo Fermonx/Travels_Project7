@@ -7,13 +7,13 @@
   "main": "index.html",
   "license": "MIT",
   "homepage": "",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "public/components"
   ],
   "dependencies": {
     "jquery": "^3.3.1",

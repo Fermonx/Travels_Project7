@@ -6,11 +6,11 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var app = express();
-var mysql = require('mysql');
 var bodyParser = require("body-parser");
 
 
-
+//map the components folder as a route
+app.use('/components', express.static(`${__dirname}/public/components`));
 
 
 // view engine setup
@@ -53,42 +53,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-    //SQL connection
-
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'mysql',
-    database: 'GHT_DB',
-
-})
-
-
-connection.connect(function(err) {
-    if (err) throw (err)
-    console.log('You are now connected...')
-});
-
-
-app.get('/signup',(req, res)=> res.sendFile(PATH.join(__dirname+`register.hbs`)))
-let newUser = {username: req.body.inputuser, email: req.body.inputemail, password1: req.body.password}
-
-
-/*
-connection.query('CREATE TABLE users(id int primary key not null, username varchar(45) not null, email varchar(45) not null, password varchar(80))', function(err, result) {
-    if (err) throw err
-    connection.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', function(err, result) {
-        if (err) throw err
-        connection.query('SELECT * FROM people', function(err, results) {
-            if (err) throw err
-            console.log(results[0].id)
-            console.log(results[0].name)
-            console.log(results[0].age)
-            console.log(results[0].address)
-        })
-    })
-})
-})*/
 
 module.exports = app;
