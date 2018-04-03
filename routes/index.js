@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require('../models/userModel');
-var bcrypt = require('bcrypt');
+
 
 
 /* GET home page. */
