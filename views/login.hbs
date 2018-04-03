@@ -7,19 +7,24 @@
                         <h3><i class="material-icons mi-center">account_circle</i> LOGIN</h3>
                     </div>
                     <hr>
-                    {{#if registroCorrecto}}
-                        <p>Registro correcto. Puede iniciar sesión.</p>
+                    {{#if loginIncorrecto}}
+                        {{>logfailure}}
                     {{/if}}
 
-                    <form>
+
+                    {{#if registroCorrecto}}
+                        {{>regsuccess}}
+                    {{/if}}
+
+                    <form method="post" action="/retrieve">
                         <div class="mt-5 form-row">
                             <div class="col-12 offset-md-2 col-md-8 form-group">
-                                <input type="text" class="form-control" id="login-name" placeholder="Nombre">
+                                <input type="text" class="form-control" id="login-name" name="username" placeholder="Nombre">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 offset-md-2 col-md-8">
-                                <input type="password" class="form-control" id="login-password" placeholder="Correo Electrónico">
+                                <input type="password" class="form-control" id="login-password" name="passwd" placeholder="Contraseña">
                             </div>
                         </div>
                         <button id="login-submit" type="submit" class="col-12 offset-md-2 col-md-4 btn btn-login">Enviar

@@ -860,4 +860,15 @@ footer ul {
     box-shadow: 0 0 0 0.2rem rgba(255, 0, 22, 0.36);
 }
 
+.modal-body
+{
+    color: black !important;
+    font-size: 25px;
+    text-align: center;
+    padding: 20px;
+}
 
+.modal-title
+{
+    color: black !important;
+}

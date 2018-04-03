@@ -4,7 +4,6 @@ $(document).ready(function () {
         let passwordLogin = $('#login-password').val();
         let encrypted = CryptoJS.AES.encrypt(passwordLogin, "Secret Passphrase");
         let decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase").toString(CryptoJS.enc.Utf8);
-        alert('Password: ' + decrypted + '\n' + 'Encriptada: ' +encrypted);
     });
 
     $("#login-submit").click(function () {
@@ -21,7 +20,11 @@ $(document).ready(function () {
     //     }
     // });
 
+    $(document).ready(function regmod() {
 
+        $('#exampleModal').modal('show');
+
+    });
 
     $(window).on('scroll', function () {
         if($(window).scrollTop()===0 && $("#menu-toggler").attr("aria-expanded")===true) {
