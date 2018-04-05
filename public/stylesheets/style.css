@@ -1,5 +1,28 @@
+.table .table
+{
+    background-color: white;
+    max-height: 80%;
+}
+
+#traveltable h2
+{
+    font-family: 'Inconsolata', monospace;
+    padding-bottom: 0.7em;
+}
 
 
+td
+{
+    font-family: 'Inconsolata', monospace;
+    color: black;
+    width: 30%;
+}
+
+th
+{
+    color:black;
+    width: 20%;
+}
 
 html, body {
     height: 100%;
@@ -707,6 +730,8 @@ footer ul {
     color: white;
     padding: 2em;
     background-color: rgba(0,0,0,0.5);
+    height: 60%;
+    width: 100%
 }
 
 .btn-login {

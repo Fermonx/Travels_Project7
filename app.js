@@ -2,12 +2,25 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const app = express();
+const morgan = require('morgan');
+//libreria de sesiones
+const session = require('express-session');
 const bodyParser = require("body-parser");
-const bcrypt = require('bcrypt');
+//libreria session flash
+const flash = require ('connect-flash');
+//winston logger
+const winston = require('./config/winston');
+
+
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var admins = require ('./routes/admins');
+var log = require ('./routes/log');
+
+var app = express();
+
+
 
 
 //map the components folder as a route
@@ -24,15 +37,32 @@ hbs.registerPartials(`${__dirname}/views/partials`);
 var hbsUtils = require('hbs-utils')(hbs);
 hbsUtils.registerWatchedPartials(`${__dirname}/views/partials`);
 
-app.use(logger('dev'));
+//app.use(morgan('dev'));
+app.use(morgan('combined',{stream: winston.stream}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
+app.use(session({
+    secret: '12345',
+    name: 'cookiedemiapp',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(flash());
+
+
+    //Routes
+app.use('/admins',admins);
+app.use('/log',log);
 app.use('/', indexRouter);
 app.use('/views', usersRouter);
+
+
+
 
     //URL Encode
 app.use(bodyParser.urlencoded({ extended: false }));

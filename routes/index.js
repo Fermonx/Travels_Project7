@@ -3,7 +3,6 @@ var router = express.Router();
 var userModel = require('../models/userModel');
 
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index.hbs', {
@@ -26,6 +25,14 @@ router.get('/registro', function(req, res, next)
         layout: 'layout'
     });
 
+});
+
+router.get('/admintable', function (req, res, next)
+{
+        res.render('admin.hbs', {
+            title: 'ADMIN VIEW',
+            layout: 'layout'
+        });
 });
 
 
