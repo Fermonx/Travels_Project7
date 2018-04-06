@@ -15,4 +15,6 @@ router.get('/create',(req,res,next)=>{
     res.redirect('/log');
 });
 
+
+
 module.exports = router;

@@ -1,40 +1,69 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require('../models/userModel');
+var travelModel = require('../models/travelModel');
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index.hbs', {
-    title: 'Geekshub Tours',
-    layout: 'layout'
-  });
+    permisos = req.session.isAdmin;
+    sesion = req.session.username;
+    travelModel.fetchTravel((error, retrieveTravel)=> {
+        if (retrieveTravel) {
+            res.render('index.hbs', {
+                title: 'Geekshub Tours',
+                layout: 'layout',
+                isAdmin: permisos,
+                isUser: sesion,
+                retrieveTravel: retrieveTravel
+
+            });
+        }
+    });
+
 });
 
 router.get('/login', function(req, res, next) {
+    permisos = req.session.isAdmin;
+    sesion = req.session.username;
   res.render('login.hbs', {
     title: 'G H T Login',
-      layout: 'layout'
+      layout: 'layout',
+      isAdmin: permisos,
+      isUser: sesion
   });
 });
 
 router.get('/registro', function(req, res, next)
 {
+    permisos = req.session.isAdmin;
+    sesion = req.session.username;
     res.render('register.hbs', {
         title: 'G H T Registro',
-        layout: 'layout'
+        layout: 'layout',
+        isAdmin: permisos,
+        isUser: sesion
     });
 
 });
 
+
 router.get('/admintable', function (req, res, next)
 {
-        res.render('admin.hbs', {
-            title: 'ADMIN VIEW',
-            layout: 'layout'
-        });
+    permisos = req.session.isAdmin;
+    sesion = req.session.username;
+    travelModel.fetchTravel((error, retrieveTravel)=> {
+        if (retrieveTravel) {
+            res.render('admin.hbs', {
+                title: 'ADMIN VIEW',
+                layout: 'layout',
+                isAdmin: permisos,
+                isUser: sesion,
+                retrieveTravel: retrieveTravel
+            });
+        }
+    });
 });
-
 
 
 router.post('/insert',(req,res,next)=>{
@@ -80,11 +109,11 @@ router.post('/retrieve',(req,res,next)=>{
     };
     userModel.fetchUser([USERS],(error, retrieveUser)=>{
         if(retrieveUser){
-            res.render('index.hbs', {
-                title: 'GHT',
-                layout: 'layout',
-                loginCorrecto: true
-            });
+            req.session.username = USERS.user;
+            console.log(retrieveUser);
+            if(retrieveUser[0].admin) req.session.isAdmin = true;
+
+            res.redirect('/')
         }else{
             res.render('login.hbs',{
                 title: 'GHT',
@@ -92,6 +121,15 @@ router.post('/retrieve',(req,res,next)=>{
                 loginIncorrecto: true
             });
         }
+    })
+});
+
+
+
+router.get('/admintable/hideTravel/:id', (req, res, next)=>{
+    travelModel.hideTravel(req.params.id, (error, cb)=>{
+        if(error) res.status(500).json(error);
+        else res.redirect('/admintable');
     })
 });
 
@@ -106,3 +144,16 @@ router.get('/*', function(req, res, next) {
 
 
 module.exports = router;
+
+
+
+/*
+
+res.render('index.hbs', {
+                title: 'GHT',
+                layout: 'layout',
+                //loginCorrecto: true,
+                isAdmin: true,
+              //  req.session.username: USERS.user
+            })
+ */

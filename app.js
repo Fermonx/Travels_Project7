@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 //libreria session flash
 const flash = require ('connect-flash');
 //winston logger
-const winston = require('./config/winston');
+//const winston = require('./config/winston');
 
 
 
@@ -38,7 +38,7 @@ var hbsUtils = require('hbs-utils')(hbs);
 hbsUtils.registerWatchedPartials(`${__dirname}/views/partials`);
 
 //app.use(morgan('dev'));
-app.use(morgan('combined',{stream: winston.stream}));
+//app.use(morgan('combined',{stream: winston.stream}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.use(session({
     secret: '12345',
-    name: 'cookiedemiapp',
+    name: 'Session',
     resave: true,
     saveUninitialized: true
 }));

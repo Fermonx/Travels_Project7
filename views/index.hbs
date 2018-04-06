@@ -106,6 +106,48 @@
                 </div>
             </div>
         </div>
+
+        <div class="carousel-item carousel-inner-resp">
+            <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
+                <div class="shadow h-100 w-100">
+                    <div class="item4-top d-flex justify-content-end">
+                        <div>
+                            <a class="back-heart" >
+                                <i class="heartt material-icons  material-heart2">favorite</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item-bottom text-dark">
+                        <h3>PEKÍN</h3>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="carousel-item carousel-inner-resp">
+            <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
+                <div class="shadow h-100 w-100">
+                    <div class="item4-top d-flex justify-content-end">
+                        <div>
+                            <a class="back-heart" >
+                                <i class="heartt material-icons  material-heart2">favorite</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item-bottom text-dark">
+                        <h3>PEKÍN</h3>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="carousel-item carousel-inner-resp">
             <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
                 <div class="shadow h-100 w-100">
@@ -138,24 +180,34 @@
 <section class="hidden-resp">
     <div class="wrapper">
         <div class="container container-destinos">
+
             <div class="row d-flex destinos-items">
-                <div class="col-12 col-md-4 destinos-item is-showing">
-                    <div class="destino destino-paris d-flex justify-content-between">
-                        <div class="price d-flex align-items-center justify-content-center align-self-end">250 &euro;</div>
-                        <a class="back-heart" >
-                            <i class="heartt material-icons  material-heart2">favorite</i>
-                        </a>
-                    </div>
-                    <div class="descripcion-destino">
-                        <p class="type-travell">
-                            <i class="material-icons type">location_on</i>
-                            Romántico
-                        </p>
-                        <h1>París, Francia</h1>
-                        <p>Escapada romántica.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 destinos-item is-showing">
+                {{# each retrieveTravel}}
+                    {{# if active}}
+                        <div class="col-12 col-md-4 destinos-item is-showing">
+                            <div class="destino d-flex justify-content-between" style="background-image: url('/images/{{travel}}.jpg'); background-color: white; background-size: cover; background-position: center;">
+                                <div class="price d-flex align-items-center justify-content-center align-self-end">{{price}}€</div>
+                                <a class="back-heart" >
+                                    <i class="heartt material-icons  material-heart2">favorite</i>
+                                </a>
+                            </div>
+                            <div class="descripcion-destino">
+                                <p class="type-travell">
+                                    <i class="material-icons type">location_on</i>
+                                    {{tipo}}
+                                </p>
+                                <h1>{{travel}}</h1>
+                                <p>{{description}}</p>
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+
+        </div>
+    </div>
+</section>
+              <!--  <div class="col-12 col-md-4 destinos-item is-showing">
                     <div class="destino destino-washington d-flex justify-content-between">
                         <div class="price d-flex align-items-center justify-content-center align-self-end">1.150 &euro;</div>
                         <a class="back-heart" >
@@ -203,6 +255,8 @@
                         <p>Un destino milenario.</p>
                     </div>
                 </div>
+
+
                 <div class="col-12 col-md-4 destinos-item is-showing">
                     <div class="destino destino-india d-flex justify-content-between">
                         <div class="price d-flex align-items-center justify-content-center align-self-end">500 &euro;</div>
@@ -238,7 +292,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section class="overHidden">
     <div class="quienes-somos d-flex align-items-center">

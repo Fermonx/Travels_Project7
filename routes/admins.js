@@ -3,12 +3,11 @@ var router = express.Router();
 
 
 router.get('/', (req,res, next)=>{
-    res.status(200).json(req.session.username || 'La sesión no se ha creado')
+    res.status(200).json(req.session || 'La sesión no se ha creado')
 });
 
 router.get('/create', (req, res, next)=>{
-    req.session.username ="fmonc";
-    req.session.isAdmin = 1;
+    req.session.username = 'Fernando';
     res.redirect('/admins');
 });
 
@@ -19,12 +18,38 @@ router.get('/remove',(req,res,next)=>{
 
 router.get('/destroy',(req,res,next)=>{
     req.session.destroy();
-    res.redirect('/admins');
+    res.render('index.hbs', {
+        title: 'Geekshub Tours',
+        layout: 'layout'
+    });
 });
 
 router.get('/private',(req,res,next)=>{
-    if(req.session.isAdmin==1) res.status(200).send("Enhorabuena");
-    else res.redirect('/admins');
-})
+    if(req.session.username === 'Fernando'){
+        res.render('index.hbs', {
+            title: 'Geekshub Tours',
+            layout: 'layout',
+            adminSi: true
+        });
+    }
+
+    else {
+        res.render('login.hbs', {
+            title: 'Geekshub Tours',
+            layout: 'layout'
+        });
+    }
+});
 
 module.exports = router;
+
+
+
+/*
+else if(req.session.siUser == 1) {
+    res.render('index.hbs', {
+        title: 'Geekshub Tours',
+        layout: 'layout',
+        siUser: true
+    });
+} */

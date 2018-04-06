@@ -79,11 +79,11 @@ iframe {
     margin:0 auto;
 }
 .nav-link {
-    color: rgba(255,255,255,0.8) !important;
+    color: rgb(0, 0, 0) !important;
 }
 
 .nav-link:hover {
-    color: rgba(255,255,255,1) !important;
+    color: rgb(130, 130, 130) !important;
 }
 
 .nav-link.active {
@@ -194,7 +194,7 @@ iframe {
     height: auto;
 }
 .item1-top {
-    background-image: url('../images/washignton.jpg');
+    background-image: url('../images/Washington.jpg');
     background-size: cover;
     background-position: center;
     height: 35vh;
@@ -203,7 +203,7 @@ iframe {
 }
 
 .item2-top {
-    background-image:  url('../images/irlanda.jpg');
+    background-image:  url('../images/Irlanda.jpg');
     background-size: cover;
     background-position: center;
     height: 35vh;
@@ -212,7 +212,7 @@ iframe {
 }
 
 .item3-top {
-    background-image: url('../images/paris.jpg');
+    background-image: url('../images/Paris.jpg');
     background-size: cover;
     background-position: center;
     height: 35vh;
@@ -221,7 +221,7 @@ iframe {
 }
 
 .item4-top {
-    background-image: url('../images/pekin.jpg');
+    background-image: url('../images/Pekin.jpg');
     background-size: cover;
     background-position: center;
     height: 35vh;
@@ -348,6 +348,7 @@ iframe {
     border-color: #e6e6e6;
     border-width: 1px 1px 0px 1px;
     border-style: solid;
+
 }
 
 .destinos-item {
@@ -361,41 +362,41 @@ iframe {
 }
 
 .destino-irlanda {
-    background-image: url('../images/irlanda.jpg');
+    background-image: url('../images/Irlanda.jpg');
     background-color: white;
     background-size: cover;
     background-position: center;
 }
 .destino-washington {
-    background-image: url('../images/washignton.jpg');
+    background-image: url('../images/Washington.jpg');
     background-color: white;
     background-size: cover;
     background-position: center;
 }
 
-.destino-paris {
-    background-image: url('../images/paris.jpg');
+.destinos
+{
     background-color: white;
     background-size: cover;
     background-position: center;
 }
 
 .destino-pekin {
-    background-image: url('../images/pekin.jpg');
+    background-image: url('../images/Pekin.jpg');
     background-color: white;
     background-size: cover;
     background-position: center;
 }
 
 .destino-india {
-    background-image: url('../images/india.jpg');
+    background-image: url('../images/India.jpg');
     background-color: white;
     background-size: cover;
     background-position: center;
 }
 
 .destino-cartagena {
-    background-image: url('../images/cartagena.jpg');
+    background-image: url('../images/Cartagena.jpg');
     background-color: white;
     background-size: cover;
     background-position: center;
@@ -835,7 +836,6 @@ footer ul {
 
     .fa-facebook-f:hover{
         color: #3b5998!important;
-        background-color: #fff;
         border-radius: 50%;
         height: 40px;
         margin: auto 3px;
@@ -844,7 +844,6 @@ footer ul {
     }
     .fa-twitter:hover, .fa-youtube:hover, .fa-instagram:hover, .fa-linkedin:hover{
         color: #00aced!important;
-        background-color: white;
         display: inline-block;
         border-radius: 50%;
         padding: 0.5em 0.5em;
@@ -897,3 +896,25 @@ footer ul {
 {
     color: black !important;
 }
+
+/*
+.btn-secondary
+{
+    background-color: transparent;
+    color: red;
+    border-color: black;
+}
+
+.btn-secondary:hover
+{
+    background-color: transparent;
+    color: black;
+    border-color: white;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle
+{
+    background-color: transparent;
+    color: black;
+    border-color: white;
+} */

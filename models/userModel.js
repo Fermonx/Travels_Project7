@@ -30,11 +30,11 @@ Users.fetchUser = ([user], cb)=>{
     const SQL = "SELECT * FROM users WHERE username=?";
     conn.query(SQL, user.user, (error, rows)=>{
         if (error) return cb(error);
-        if(user.pw == rows[0].password) return cb(null, true);
+        if(user.pw == rows[0].password) return cb(null, rows);
         else return cb(null, false);
         console.log(SQL);
         console.log(user);
-        console.log(rows);
+        //console.log(rows);
     })
 };
 
