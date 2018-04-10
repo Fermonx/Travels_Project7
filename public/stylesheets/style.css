@@ -1,7 +1,7 @@
 .table .table
 {
     background-color: white;
-    max-height: 80%;
+    max-height: 70%;
 }
 
 #traveltable h2
@@ -731,7 +731,7 @@ footer ul {
     color: white;
     padding: 2em;
     background-color: rgba(0,0,0,0.5);
-    height: 60%;
+    height: 70%;
     width: 100%
 }
 
@@ -896,6 +896,26 @@ footer ul {
 {
     color: black !important;
 }
+
+#createModal .modal-content
+{
+    width: 450px;
+    height: 480px;
+    margin:auto;
+}
+
+#removeModal .modal-content
+{
+    width: 300px;
+    height: 350px;
+    margin:auto;
+}
+
+.dropdown-menu.show {
+    display: block;
+    margin-left: 140px;
+}
+
 
 /*
 .btn-secondary

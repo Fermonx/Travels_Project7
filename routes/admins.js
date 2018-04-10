@@ -18,10 +18,7 @@ router.get('/remove',(req,res,next)=>{
 
 router.get('/destroy',(req,res,next)=>{
     req.session.destroy();
-    res.render('index.hbs', {
-        title: 'Geekshub Tours',
-        layout: 'layout'
-    });
+    res.redirect('/');
 });
 
 router.get('/private',(req,res,next)=>{

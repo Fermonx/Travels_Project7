@@ -26,30 +26,40 @@
 
     <div class="navbar-brand navbar-rrss col-3 d-none d-lg-block" href="#">
         {{# if isAdmin}}
-        <div class="dropdown dropleft">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Admin
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                    <a class="dropdown-item nav-link" href="/admintable">Control de Viajes</a>
-                    <a class="nav-item nav-link" href="/admins/destroy">Logout</a>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="/admintable">Panel de Viajes</a></li>
+                    <li><a href="/admins/destroy">Desconectar</a></li>
 
-                <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                </ul>
             </div>
 
 
         {{else if isUser}}
         <div class="dropdown dropleft">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Usuario
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                <a class="nav-item nav-link" href="#">Mi Perfil</a>
-                <a class="nav-item nav-link" href="/admins/destroy">Logout</a>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuario
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Mi Perfil</a></li>
+                    <li><a href="/admins/destroy">Desconectar</a></li>
+                </ul>
             </div>
         {{/if}}
         </div>
     </div>
 </nav>
+
+<!--
+<div class="dropdown dropleft">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Admin
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item nav-link" href="/admintable">Control de Viajes</a>
+        <a class="nav-item nav-link" href="/admins/destroy">Logout</a>
+
+    </div> -->

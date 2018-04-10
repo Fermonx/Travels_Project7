@@ -52,17 +52,21 @@ router.get('/admintable', function (req, res, next)
 {
     permisos = req.session.isAdmin;
     sesion = req.session.username;
-    travelModel.fetchTravel((error, retrieveTravel)=> {
-        if (retrieveTravel) {
-            res.render('admin.hbs', {
-                title: 'ADMIN VIEW',
-                layout: 'layout',
-                isAdmin: permisos,
-                isUser: sesion,
-                retrieveTravel: retrieveTravel
-            });
-        }
-    });
+    if(permisos == 1)
+    {
+        travelModel.fetchTravel((error, retrieveTravel)=> {
+            if (retrieveTravel) {
+                res.render('admin.hbs', {
+                    title: 'ADMIN VIEW',
+                    layout: 'layout',
+                    isAdmin: permisos,
+                    isUser: sesion,
+                    retrieveTravel: retrieveTravel
+                });
+            }
+        });
+    }
+    else res.redirect('/');
 });
 
 
@@ -110,7 +114,6 @@ router.post('/retrieve',(req,res,next)=>{
     userModel.fetchUser([USERS],(error, retrieveUser)=>{
         if(retrieveUser){
             req.session.username = USERS.user;
-            console.log(retrieveUser);
             if(retrieveUser[0].admin) req.session.isAdmin = true;
 
             res.redirect('/')
@@ -134,8 +137,37 @@ router.get('/admintable/hideTravel/:id', (req, res, next)=>{
 });
 
 
+router.post('/admintable/create', function (req,res,next) {
+    let travel={
+        travel:req.body.travel,
+        description:req.body.description,
+        price:req.body.price,
+        tipo:req.body.tipo
+    };
+    travelModel.travelCreate(travel,(error,trav)=>{
+        if(error) res.status(500).json(error);
+        else{
+            res.redirect('/admintable');
+        }
+    })
+
+});
+
+router.get('/admintable/travelDelete/:id', (req,res,next)=> {
+    travelModel.travelDelete(req.params.id,(error,cb)=>{
+        if(error) res.status(500).json(error);
+        else{
+            res.redirect('/admintable');
+        }
+    })
+});
+
 router.get('/*', function(req, res, next) {
+    permisos = req.session.isAdmin;
+    sesion = req.session.username;
     res.render('404.hbs', {
+        isAdmin: permisos,
+        isUser: sesion,
         title: 'Oops!',
         layout: 'layout'
     });
