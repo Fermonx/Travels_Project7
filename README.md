@@ -12,4 +12,4 @@ Functions to achieve this week:
   
   - Use Multer to make the images of the travels be accessible from the server, this includes, adding and removing them.
   
-  - 
+ 
