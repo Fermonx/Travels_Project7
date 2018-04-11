@@ -5,7 +5,6 @@ var winston = require('../config/winston');
 
 router.get('/',(req,res,next)=>{
     winston.info(("Error en la generacion"));
-    res.send(req.flash('info'));
     res.send(req.flash('error'));
 });
 

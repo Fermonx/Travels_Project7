@@ -2,7 +2,7 @@ var appRoot = require('app-root-path');
 var winston = require('winston');
 var options = {
     file: {
-        level: 'info',
+        level: 'error',
         filename: `${appRoot}/logs/app.log`,
         handleExceptions: true,
         json: true,

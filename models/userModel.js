@@ -63,6 +63,20 @@ Users.deactivateUser = (id,cb)=>{
     };
 
 
+Users.userDelete=(id,cb)=>{
+    if(!conn) return cb("No se ha podido realizar conexión");
+    conn.query("SELECT * FROM users WHERE id=?", id ,function (error,resultado) {
+        if(error) return cb(error);
+        else {
+            conn.query("Delete from users where id=?", id ,function () {
+                if(error) return cb(error);
+                return cb(null,resultado);
+            })
+        }
+    })
+};
+
+
 
 module.exports = Users;
 

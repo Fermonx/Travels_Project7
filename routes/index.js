@@ -189,6 +189,16 @@ router.get('/admintable/travelDelete/:id', (req,res,next)=> {
     })
 });
 
+
+router.get('/userstable/userDelete/:id', (req,res,next)=> {
+    userModel.userDelete(req.params.id,(error,cb)=>{
+        if(error) res.status(500).json(error);
+        else{
+            res.redirect('/userstable');
+        }
+    })
+});
+
 router.get('/*', function(req, res, next) {
     permisos = req.session.isAdmin;
     sesion = req.session.username;
