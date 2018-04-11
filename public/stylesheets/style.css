@@ -1,7 +1,8 @@
 .table .table
 {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     max-height: 70%;
+    border: 3px solid white;
 }
 
 #traveltable h2
@@ -14,14 +15,15 @@
 td
 {
     font-family: 'Inconsolata', monospace;
-    color: black;
     width: 30%;
+    font-size: 16.5px;
 }
 
 th
 {
-    color:black;
+    border: 0 !important;
     width: 20%;
+    font-size: 18px;
 }
 
 html, body {
@@ -90,9 +92,9 @@ iframe {
     color: rgba(255,255,255,1) !important;
 }
 
-.navbar-rrss {
+.navbar-sess {
     color: white !important;
-    text-align: right;
+
 }
 .menu-icon {
     color: white !important;
@@ -117,7 +119,7 @@ iframe {
 
 .nav-scroll, .nav-scroll a, .nav-scroll i {
     background-color: white !important;
-    color: #727272 !important;
+    color: #000000 !important;
 
 }
 
@@ -128,7 +130,7 @@ iframe {
 }
 
 .menu-scroll a:hover {
-    color: black!important;
+    color: #6c6c6c !important;
 }
 
 
@@ -361,42 +363,9 @@ iframe {
     transform: translateY(0px);
 }
 
-.destino-irlanda {
-    background-image: url('../images/Irlanda.jpg');
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-}
-.destino-washington {
-    background-image: url('../images/Washington.jpg');
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-}
 
 .destinos
 {
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-}
-
-.destino-pekin {
-    background-image: url('../images/Pekin.jpg');
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-}
-
-.destino-india {
-    background-image: url('../images/India.jpg');
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-}
-
-.destino-cartagena {
-    background-image: url('../images/Cartagena.jpg');
     background-color: white;
     background-size: cover;
     background-position: center;
@@ -911,30 +880,63 @@ footer ul {
     margin:auto;
 }
 
-.dropdown-menu.show {
+
+.dropdown-menu
+{
+    text-decoration: none;
+    text-underline: none;
+    color: black;
+    background-color: white;
+}
+
+.dropdown:hover .dropdown-menu {
     display: block;
-    margin-left: 140px;
+
 }
 
+.dropdown-menu a:visited
+{
+    text-decoration: none;
+    color: black;
+}
 
-/*
-.btn-secondary
+.dropbtn
 {
     background-color: transparent;
+}
+
+.tabledelete
+{
+    color: darkred;
+    background-color: transparent;
+}
+
+.tabledelete:hover
+{
     color: red;
-    border-color: black;
+    background-color: transparent;
 }
 
-.btn-secondary:hover
+.tableres
 {
+    color: dodgerblue;
     background-color: transparent;
-    color: black;
-    border-color: white;
 }
 
-.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle
+.tableedit
 {
+    color: grey;
     background-color: transparent;
-    color: black;
-    border-color: white;
-} */
+}
+
+.tableedit:hover
+{
+    color: white;
+    background-color: transparent;
+}
+
+.fa-plus-circle
+{
+    color: white;
+    padding-right: 5px;
+}

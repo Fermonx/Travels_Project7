@@ -16,7 +16,7 @@ travels.fetchTravel = (cb)=>{
 travels.hideTravel = (id, cb)=>{
     if(!conn) return cb("No se ha podido crear la conexión");
     conn.query("SELECT * FROM travels WHERE id=?", id ,function(error,resultado){
-        if(error) return cb(error)
+        if(error) return cb(error);
         else{
             let valorActivo = resultado[0].active;
             if(valorActivo == 1) valorActivo = 0;

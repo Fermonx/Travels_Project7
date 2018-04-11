@@ -69,6 +69,26 @@ router.get('/admintable', function (req, res, next)
     else res.redirect('/');
 });
 
+router.get('/userstable', function (req, res, next)
+{
+   permisos = req.session.isAdmin;
+   sesion = req.session.username;
+   if(permisos == 1)
+   {
+       userModel.fetchUsersT((error,retrieveUser)=>{
+           if(retrieveUser){
+               res.render('userstable.hbs', {
+                   title:'ADMIN VIEW',
+                   layout: 'layout',
+                   isAdmin: permisos,
+                   isUser: sesion,
+                   retrieveUser: retrieveUser
+               });
+           }
+       });
+   }
+});
+
 
 router.post('/insert',(req,res,next)=>{
     var pswEnc = (function(){
@@ -136,6 +156,13 @@ router.get('/admintable/hideTravel/:id', (req, res, next)=>{
     })
 });
 
+
+router.get('/userstable/deactivateUser/:id', (req, res, next)=>{
+    userModel.deactivateUser(req.params.id, (error, cb)=>{
+        if(error) res.status(500).json(error);
+        else res.redirect('/userstable');
+    })
+});
 
 router.post('/admintable/create', function (req,res,next) {
     let travel={

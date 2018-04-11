@@ -1,0 +1,75 @@
+<div id="traveltable" class="login-wrapper d-flex align-items-center table ">
+    <div class="container form-login">
+        <h2 class="d-flex justify-content-center">Administración de Usuarios</h2>
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Activo</th>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {{#each retrieveUser}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{username}}</td>
+                    <td>{{email}}</td>
+                    <td>{{admin}}</td>
+                    <td>{{active}}</td>
+
+                    <td><input type="checkbox"  onclick='window.location.assign("/userstable/deactivateUser/{{id}}")' {{#if active}}checked{{/if}}></td>
+                    <td><button type="button"  onclick='window.location.assign("/userstable/travelDelete/{{id}}")' class="btn tabledelete"><i class="fas fa-trash"></i></button></td>
+                    <td><button type="button"  onclick='' class="btn tableres" data-toggle="tooltip" data-placement="top" title="Petición: Reestablecer Password"><i class="fas fa-envelope"></i></button></td>
+                </tr>
+            {{/each}}
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+<div class="modal fade " id="createModal" tabindex="-1" role="textbox" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Viaje</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/admintable/create">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <input type="text" placeholder="Nombre" name="travel" required>
+                                <br/>
+                                <br/>
+                                <input type="text" placeholder="Descripcion" name="description" required>
+
+                            </div>
+                            <div class="col-12 ">
+                                <br/>
+                                <input type="text" placeholder="Precio" name="price" required>
+                                <br/>
+                                <br/>
+                                <input type="text" placeholder="Tipo" name="tipo" required>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-success">Crear</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+

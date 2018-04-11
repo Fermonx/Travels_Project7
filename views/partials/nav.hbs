@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light navbar-expand-lg nav-fixed">
+<nav class="stroke navbar navbar-light bg-light navbar-expand-lg nav-fixed ">
 
     <a class="navbar-brand col-3" href="/">
         <i class="fas fa-plane" href="#"></i>
@@ -12,25 +12,25 @@
         <div class="navbar-nav navbar-center" id="main-menu">
 
             <a class="nav-item nav-link" href="/">Viajes<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Ofertas</a>
             <a class="nav-item nav-link" href="#">¿Quiénes somos?</a>
             <a class="nav-item nav-link" href="#">¿Dónde estamos?</a>
             <a class="nav-item nav-link" href="/login">Login</a>
             <a class="nav-item nav-link" href="/registro">Registro</a>
 
 
-
         </div>
 
     </div>
 
-    <div class="navbar-brand navbar-rrss col-3 d-none d-lg-block" href="#">
+
+    <div class="navbar-brand navbar-sess col-3 d-none d-lg-block" href="#">
         {{# if isAdmin}}
 
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin
+                <button class="btn dropdown-toggle dropbtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user" style="padding-right: 5px"></i>Admin
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
+                    <li><a href="/userstable">Panel de Usuarios</a></li>
                     <li><a href="/admintable">Panel de Viajes</a></li>
                     <li><a href="/admins/destroy">Desconectar</a></li>
 
@@ -39,9 +39,9 @@
 
 
         {{else if isUser}}
-        <div class="dropdown dropleft">
+        <div class="dropdown">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuario
+                <button class="btn dropbtn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user" style="padding-right: 5px"></i>Usuario
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li><a href="#">Mi Perfil</a></li>
@@ -50,16 +50,9 @@
             </div>
         {{/if}}
         </div>
+
+
     </div>
 </nav>
 
-<!--
-<div class="dropdown dropleft">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Admin
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item nav-link" href="/admintable">Control de Viajes</a>
-        <a class="nav-item nav-link" href="/admins/destroy">Logout</a>
 
-    </div> -->

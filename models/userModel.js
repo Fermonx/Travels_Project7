@@ -32,11 +32,37 @@ Users.fetchUser = ([user], cb)=>{
         if (error) return cb(error);
         if(user.pw == rows[0].password) return cb(null, rows);
         else return cb(null, false);
-        console.log(SQL);
-        console.log(user);
-        //console.log(rows);
     })
 };
+
+Users.fetchUsersT = (cb)=>{
+    if(!conn) return cb("No se ha podido crear la conexión");
+    const SQL = "SELECT * FROM users";
+    conn.query(SQL, (error, rows)=>{
+        if(error) return cb(error);
+        else return cb(null, rows);
+    })
+};
+
+Users.deactivateUser = (id,cb)=>{
+    if(!conn) return cb("No se ha podido crear la conexión");
+    conn.query("SELECT * FROM users WHERE id=?", id ,function(error, resultado) {
+        if(error) return cb(error);
+        else{
+            let valorActivo = resultado[0].active;
+            if(valorActivo == 1) valorActivo = 0;
+            else valorActivo = 1;
+            conn.query("UPDATE users SET active="+valorActivo+" WHERE id=?",id,function() {
+                if (error) return cb(error);
+                return cb(null, resultado);
+            })
+
+            }
+
+        })
+    };
+
+
 
 module.exports = Users;
 

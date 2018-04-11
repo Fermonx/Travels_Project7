@@ -1,7 +1,7 @@
     <div id="traveltable" class="login-wrapper d-flex align-items-center table ">
         <div class="container form-login">
             <h2 class="d-flex justify-content-center">Administración de Viajes</h2>
-            <table class="table table-condensed table-responsive">
+            <table class="table table-responsive">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -10,6 +10,7 @@
                     <th>Precio</th>
                     <th>Tipo</th>
                     <th>Activo</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -22,7 +23,8 @@
                             <td>{{tipo}}</td>
 
                             <td><input type="checkbox"  onclick='window.location.assign("/admintable/hideTravel/{{id}}")' {{#if active}}checked{{/if}}></td>
-                            <td><button type="button"  onclick='window.location.assign("/admintable/travelDelete/{{id}}")' class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                            <td><button type="button"  onclick='window.location.assign("/admintable/travelDelete/{{id}}")' class="btn tabledelete"><i class="fas fa-trash"></i></button></td>
+                            <td><button type="button" class="btn  tableedit"><i class=" fas fa-edit"></i</button></td>
                         </tr>
                 {{/each}}
 
@@ -31,8 +33,8 @@
 
                 </div>
             </table>
-            <button type="submit" data-toggle="modal" data-target="#createModal" class="btn btn-success align-items-end">Crear</button>
-            <button type="button" class="btn btn-info align-items-end" style="margin-left: 10px;">Modificar</button>
+            <button type="submit" data-toggle="modal" data-target="#createModal" class="btn btn-success align-items-end"><i class="fas fa-plus-circle"></i>Agregar</button>
+
         </div>
     </div>
 
@@ -41,6 +43,47 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Viaje</h5>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/admintable/create">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12" style="padding-bottom: 0.2em;">
+                                    <input type="text" placeholder="Nombre" name="travel" required>
+                                </div>
+
+                                <div class="col-12">
+                                    <input type="text" placeholder="Descripcion" name="description" required>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-12" style="padding-bottom: 0.2em;">
+                                    <input type="text" placeholder="Precio" name="price" required>
+                                </div>
+
+                                <div class="col-12">
+                                    <input type="text" placeholder="Tipo" name="tipo" required>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <button type="submit" class="btn btn-outline-success" style="padding-left 15px; padding-right: 15px;">Crear</button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="editModal" tabindex="-1" role="textbox" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Viaje</h5>
                 </div>
                 <div class="modal-body">
                     <form method="post" action="/admintable/create">
