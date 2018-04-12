@@ -3,22 +3,20 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-//libreria de sesiones
 const session = require('express-session');
 const bodyParser = require("body-parser");
-//libreria session flash
 const flash = require ('connect-flash');
-//winston logger
+
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const admins = require ('./routes/admins');
+const log = require ('./routes/log');
+const mailer = require('./routes/mailer');
 const winston = require('./config/winston');
+const multer = require('./routes/multer');
 
-
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var admins = require ('./routes/admins');
-var log = require ('./routes/log');
-
-var app = express();
+const app = express();
 
 
 
@@ -60,9 +58,8 @@ app.use('/admins',admins);
 app.use('/log',log);
 app.use('/', indexRouter);
 app.use('/views', usersRouter);
-
-
-
+app.use('/mailer', mailer);
+app.use('/multer',multer);
 
     //URL Encode
 app.use(bodyParser.urlencoded({ extended: false }));

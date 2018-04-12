@@ -1,4 +1,5 @@
 let conn = require('../connection/mysqlconnection');
+let sequelize = require('../config/sequelize');
 let travels = {};
 
 travels.fetchTravel = (cb)=>{

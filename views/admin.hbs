@@ -9,7 +9,9 @@
                     <th>Descripción</th>
                     <th>Precio</th>
                     <th>Tipo</th>
+                    <th>Imagen</th>
                     <th>Activo</th>
+
 
                 </tr>
                 </thead>
@@ -21,10 +23,12 @@
                             <td>{{description}}</td>
                             <td>{{price}}</td>
                             <td>{{tipo}}</td>
+                            <td></td>
 
                             <td><input type="checkbox"  onclick='window.location.assign("/admintable/hideTravel/{{id}}")' {{#if active}}checked{{/if}}></td>
                             <td><button type="button"  onclick='window.location.assign("/admintable/travelDelete/{{id}}")' class="btn tabledelete"><i class="fas fa-trash"></i></button></td>
                             <td><button type="button" class="btn  tableedit"><i class=" fas fa-edit"></i</button></td>
+
                         </tr>
                 {{/each}}
 

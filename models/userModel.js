@@ -1,4 +1,6 @@
 let conn = require('../connection/mysqlconnection');
+let sequelize = require('../config/sequelize');
+let Sequelize = require('sequelize');
 let Users = {};
 
 
@@ -12,6 +14,7 @@ Users.fetchAll = (cb)=>{
         else return cb(null, rows);
     })
 };
+
 
 
 //Inyectar datos a la DB

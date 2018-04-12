@@ -198,6 +198,7 @@ router.get('/userstable/userDelete/:id', (req,res,next)=> {
         }
     })
 });
+/*
 
 router.get('/*', function(req, res, next) {
     permisos = req.session.isAdmin;
@@ -208,21 +209,10 @@ router.get('/*', function(req, res, next) {
         title: 'Oops!',
         layout: 'layout'
     });
-});
+}); */
+
+
 
 
 
 module.exports = router;
-
-
-
-/*
-
-res.render('index.hbs', {
-                title: 'GHT',
-                layout: 'layout',
-                //loginCorrecto: true,
-                isAdmin: true,
-              //  req.session.username: USERS.user
-            })
- */
