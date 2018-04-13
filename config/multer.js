@@ -13,12 +13,5 @@ const storage = Multer.diskStorage({
 });
 const upload = Multer({storage});
 
-router.get('/',(req,res,next)=>{
-    res.render('subir',{
-        title:'Subida de archivos',
-        layout: 'layout'});
-})
-router.post('/upload',upload.single('file'),(req, res, next)=>{
-    res.json(req.file);
-})
-module.exports = router;
+
+module.exports = upload;

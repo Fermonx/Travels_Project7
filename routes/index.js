@@ -1,7 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var userModel = require('../models/userModel');
 var travelModel = require('../models/travelModel');
+var userModel = require('../models/userModel');
+
+const Multer = require('multer');
+const upload = require('../config/multer');
+
 
 
 /* GET home page. */
@@ -47,6 +51,7 @@ router.get('/registro', function(req, res, next)
 
 });
 
+// PANEL ADMINISTRACION DE VIAJES
 
 router.get('/admintable', function (req, res, next)
 {
@@ -69,6 +74,44 @@ router.get('/admintable', function (req, res, next)
     else res.redirect('/');
 });
 
+
+router.get('/admintable/hideTravel/:id', (req, res, next)=>{
+    travelModel.hideTravel(req.params.id, (error, cb)=>{
+        if(error) res.status(500).json(error);
+        else res.redirect('/admintable');
+    })
+});
+
+router.post('/admintable/create',upload.single('file'), function (req,res,next) {
+    console.log(req.file);
+    let travel={
+        travel:req.body.travel,
+        description:req.body.description,
+        price:req.body.price,
+        tipo:req.body.tipo,
+        image:req.file.path
+    };
+    travel.image = travel.image.replace("\\", "/");
+    travelModel.travelCreate(travel,(error,trav)=>{
+        if(error) res.status(500).json(error);
+        else{
+            res.redirect('/admintable');
+        }
+    })
+
+});
+
+router.get('/admintable/travelDelete/:id', (req,res,next)=> {
+    travelModel.travelDelete(req.params.id,(error,cb)=>{
+        if(error) res.status(500).json(error);
+        else{
+            res.redirect('/admintable');
+        }
+    })
+});
+
+//PANEL ADMINISTRACION DE USUARIOS
+
 router.get('/userstable', function (req, res, next)
 {
    permisos = req.session.isAdmin;
@@ -89,6 +132,26 @@ router.get('/userstable', function (req, res, next)
    }
 });
 
+router.get('/userstable/deactivateUser/:id', (req, res, next)=>{
+    userModel.deactivateUser(req.params.id, (error, cb)=>{
+        if(error) res.status(500).json(error);
+        else res.redirect('/userstable');
+    })
+});
+
+
+
+router.get('/userstable/userDelete/:id', (req,res,next)=> {
+    userModel.userDelete(req.params.id,(error,cb)=>{
+        if(error) res.status(500).json(error);
+        else{
+            res.redirect('/userstable');
+        }
+    })
+});
+
+
+//INSERTAR EN LA BASE DE DATOS
 
 router.post('/insert',(req,res,next)=>{
     var pswEnc = (function(){
@@ -116,6 +179,9 @@ router.post('/insert',(req,res,next)=>{
         res.status(500).json('Error al crear usuario'+ error);
     })
 });
+
+
+//RECUPERAR DE LA BASE DE DATOS
 
 router.post('/retrieve',(req,res,next)=>{
     var pswEnc = (function(){
@@ -149,55 +215,6 @@ router.post('/retrieve',(req,res,next)=>{
 
 
 
-router.get('/admintable/hideTravel/:id', (req, res, next)=>{
-    travelModel.hideTravel(req.params.id, (error, cb)=>{
-        if(error) res.status(500).json(error);
-        else res.redirect('/admintable');
-    })
-});
-
-
-router.get('/userstable/deactivateUser/:id', (req, res, next)=>{
-    userModel.deactivateUser(req.params.id, (error, cb)=>{
-        if(error) res.status(500).json(error);
-        else res.redirect('/userstable');
-    })
-});
-
-router.post('/admintable/create', function (req,res,next) {
-    let travel={
-        travel:req.body.travel,
-        description:req.body.description,
-        price:req.body.price,
-        tipo:req.body.tipo
-    };
-    travelModel.travelCreate(travel,(error,trav)=>{
-        if(error) res.status(500).json(error);
-        else{
-            res.redirect('/admintable');
-        }
-    })
-
-});
-
-router.get('/admintable/travelDelete/:id', (req,res,next)=> {
-    travelModel.travelDelete(req.params.id,(error,cb)=>{
-        if(error) res.status(500).json(error);
-        else{
-            res.redirect('/admintable');
-        }
-    })
-});
-
-
-router.get('/userstable/userDelete/:id', (req,res,next)=> {
-    userModel.userDelete(req.params.id,(error,cb)=>{
-        if(error) res.status(500).json(error);
-        else{
-            res.redirect('/userstable');
-        }
-    })
-});
 /*
 
 router.get('/*', function(req, res, next) {

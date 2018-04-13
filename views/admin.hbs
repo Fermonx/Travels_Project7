@@ -10,6 +10,7 @@
                     <th>Precio</th>
                     <th>Tipo</th>
                     <th>Imagen</th>
+                    <th>Preview</th>
                     <th>Activo</th>
 
 
@@ -23,7 +24,8 @@
                             <td>{{description}}</td>
                             <td>{{price}}</td>
                             <td>{{tipo}}</td>
-                            <td></td>
+                            <td>{{image}}</td>
+                            <td><img src={{image}} alt={{travel}} id="admtrav"></td>
 
                             <td><input type="checkbox"  onclick='window.location.assign("/admintable/hideTravel/{{id}}")' {{#if active}}checked{{/if}}></td>
                             <td><button type="button"  onclick='window.location.assign("/admintable/travelDelete/{{id}}")' class="btn tabledelete"><i class="fas fa-trash"></i></button></td>
@@ -37,7 +39,15 @@
 
                 </div>
             </table>
-            <button type="submit" data-toggle="modal" data-target="#createModal" class="btn btn-success align-items-end"><i class="fas fa-plus-circle"></i>Agregar</button>
+
+            <div class="d-flex container">
+                <div class="row">
+                    <div class="col-4">
+                        <button type="submit" data-toggle="modal" data-target="#createModal" class="btn btn-success align-items-end"><i class="fas fa-plus-circle"></i>Agregar</button>
+                    </div>
+
+                </div>
+            </div>
 
         </div>
     </div>
@@ -49,18 +59,18 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Viaje</h5>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/admintable/create">
+                    <form method="post" action="/admintable/create" enctype="multipart/form-data">
                         <div class="container">
                             <div class="row">
                                 <div class="col-12" style="padding-bottom: 0.2em;">
                                     <input type="text" placeholder="Nombre" name="travel" required>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 form-group">
                                     <input type="text" placeholder="Descripcion" name="description" required>
                                 </div>
                             </div>
-                            <br/>
+
                             <div class="row">
                                 <div class="col-12" style="padding-bottom: 0.2em;">
                                     <input type="text" placeholder="Precio" name="price" required>
@@ -72,12 +82,21 @@
                             </div>
                         </div>
                         <br/>
-                        <button type="submit" class="btn btn-outline-success" style="padding-left 15px; padding-right: 15px;">Crear</button>
+
+                            <div class="form-group">
+                                <input type="file" name="file" class="form-control-dark"  style="font-size: 16px;" required>
+                            </div>
+                            <div class="form-group">
+                                <div class="container">
+                                    <div class="col-3">
+
+                                    </div>
+                                </div>
+                            </div>
+                        <button type="submit" class="btn btn-outline-success" style="padding-left: 15px; padding-right: 15px;">Crear</button>
+
                     </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                </div>
-                <div class="modal-footer">
-
                 </div>
             </div>
         </div>

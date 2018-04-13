@@ -1,20 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-
 router.get('/', (req,res, next)=>{
     res.status(200).json(req.session || 'La sesión no se ha creado')
 });
 
-router.get('/create', (req, res, next)=>{
-    req.session.username = 'Fernando';
-    res.redirect('/admins');
-});
-
-router.get('/remove',(req,res,next)=>{
-    req.session.username = null;
-    res.redirect('/admins');
-});
 
 router.get('/destroy',(req,res,next)=>{
     req.session.destroy();
@@ -38,15 +28,18 @@ router.get('/private',(req,res,next)=>{
     }
 });
 
+
 module.exports = router;
 
 
 
 /*
-else if(req.session.siUser == 1) {
-    res.render('index.hbs', {
-        title: 'Geekshub Tours',
-        layout: 'layout',
-        siUser: true
-    });
-} */
+router.get('/create', (req, res, next)=>{
+    req.session.username = 'Fernando';
+    res.redirect('/admins');
+});
+
+router.get('/remove',(req,res,next)=>{
+    req.session.username = null;
+    res.redirect('/admins');
+}); */

@@ -14,7 +14,7 @@ const admins = require ('./routes/admins');
 const log = require ('./routes/log');
 const mailer = require('./routes/mailer');
 const winston = require('./config/winston');
-const multer = require('./routes/multer');
+const multer = require('./config/multer');
 
 const app = express();
 
@@ -41,6 +41,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use( "/uploads", express.static( path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.use(session({
@@ -59,7 +60,7 @@ app.use('/log',log);
 app.use('/', indexRouter);
 app.use('/views', usersRouter);
 app.use('/mailer', mailer);
-app.use('/multer',multer);
+
 
     //URL Encode
 app.use(bodyParser.urlencoded({ extended: false }));
