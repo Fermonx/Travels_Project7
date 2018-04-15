@@ -58,9 +58,12 @@ Users.fetchUsersT = (cb)=>{
     })
 };
 
-Users.fetchHash = (cb)=>{
+Users.activate = (hash, cb)=>{
     if(!conn) return cb("No hay conexion");
-    const SQL = "SELECT * FROM";
+    conn.query = "UPDATE users SET active=1 WHERE hash=?", hash, function(error,resultado){
+        if(error) return cb(error);
+        else return cb(null, resultado);
+    };
 };
 
 Users.deactivateUser = (id,cb)=>{

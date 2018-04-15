@@ -170,20 +170,13 @@ router.post('/insert',(req,res,next)=>{
         }
         return hash;
     })();
-    var hashGen = (function () {
-       var hash = 0;
-       for (i = 0; i<req.body.username.length; i++){
-           char = req.body.username.charCodeAt(i);
-           hash = ((hash<<5)-hash)+char;
-           hash = hash & hash;
-       }
-       return hash;
-    })();
 
     const user ={
         "username": req.body.username,
         "email": req.body.email,
         "password": pswEnc,
+        "active":0,
+        "admin":0,
         "hash": hash
     };
 
@@ -192,12 +185,18 @@ router.post('/insert',(req,res,next)=>{
         switch(insertUSR)
         {
             case 1:
-                req.flash('errorUsuario','El usuario ya existe, inténtelo de nuevo');
-                res.redirect('/registro');
+                res.render('register.hbs', {
+                    title: 'G H T Login',
+                    layout: 'layout',
+                    userTaken: true
+                });
                 break;
             case 2:
-                req.flash('errorEmail','El email ya existe, inténtelo de nuevo');
-                res.redirect('registro');
+                res.render('register.hbs', {
+                    title: 'G H T Login',
+                    layout: 'layout',
+                    emailTaken: true
+                });
                 break;
             case 3:
                 let hash2=user.hash;
@@ -212,8 +211,12 @@ router.post('/insert',(req,res,next)=>{
                 let message = {
                     to: user.email,
                     subject : 'Geekshubs Travel - Activar Cuenta',
-                    template:'email'
-                };
+                    template:'email',
+                    context:{
+                        hash: user.hash
+                    },
+                }
+
                 Email.transporter.sendMail(message,(error,info) =>{
                     if(error){
                         res.status(500).send(error);
@@ -270,7 +273,10 @@ router.post('/retrieve',(req,res,next)=>{
 // ACTIVACION USUARIO
 
 router.get('/activate/:hash', (req,res,next)=>{
-
+    userModel.activate(req.params.hash, (error, cb)=>{
+        if(error) res.status(500).json(error);
+        else res.redirect('/login');
+    })
 });
 
 router.get('/recoverpw', (req,res,next)=>{
@@ -301,3 +307,25 @@ router.get('/*', function(req, res, next) {
 
 
 module.exports = router;
+
+
+
+
+/*(function(){
+        var hash = 0;
+        for (i = 0; i < req.body.passw.length; i++) {
+            char = req.body.passw.charCodeAt(i);
+            hash = ((hash<<5)-hash)+char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
+    })();
+    var hashGen = (function () {
+       var hash = 0;
+       for (i = 0; i<req.body.username.length; i++){
+           char = req.body.username.charCodeAt(i);
+           hash = ((hash<<5)-hash)+char;
+           hash = hash & hash;
+       }
+       return hash;
+    })();*/
