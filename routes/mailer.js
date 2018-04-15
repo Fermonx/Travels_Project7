@@ -16,19 +16,30 @@ router.get('/send',(req,res,next) =>{
 
     let message= {
         to:'fernandomds@outlook.com',
-        subject : 'Email de prueba',
-        template:'email',
-        attachments:[
-            {
-                filename:'16083767_ml.jpg',
-                path:__dirname +'/../public/images/16083767_ml.jpg',
-                cid: 'imagen'
-            },
-            {
-                filename:'super.jpeg',
-                path:__dirname +'/../public/images/16083767_ml.jpg'
-            }
-        ]
+        subject : 'Geekshubs Travel - Activar Cuenta',
+        template:'email'
+    };
+    Email.transporter.sendMail(message,(error,info) =>{
+        if(error){
+            res.status(500).send(error);
+            return
+        }
+        Email.transporter.close();
+        res.status(200).send('Respuesta "%s"' + info.response);
+    })
+});
+
+router.get('/sendreco',(req,res,next) =>{
+    Email.transporter.use('compile', Hbs ({
+        viewEngine: 'hbs',
+        extName:'.hbs',
+        viewPath: Path.join(__dirname,'../views/emailTemplates')
+    }));
+
+    let message= {
+        to:'fernandomds@outlook.com',
+        subject : 'Geekshubs Travel - Recuperar Contraseña',
+        template:'email'
     };
     Email.transporter.sendMail(message,(error,info) =>{
         if(error){

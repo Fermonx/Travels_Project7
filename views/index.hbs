@@ -51,130 +51,28 @@
         <h1>Destinos</h1>
         <hr>
     </div>
-    <div class="carousel-inner align-items-center ">
-        <div class="carousel-item active carousel-inner-resp">
-            <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
-                <div class="shadow h-100 w-100">
-                    <div class="item1-top d-flex justify-content-end">
-                        <div>
-                            <a class="back-heart" >
-                                <i class="heartt material-icons  material-heart2">favorite</i>
-                            </a>
+    {{#each retrieveTravel}}
+        {{#if active}}
+            <div class="carousel-item carousel-inner-resp">
+                <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
+                    <div class="shadow h-100 w-100">
+                        <div class="item2-top d-flex justify-content-end">
+                            <div>
+                                <a class="back-heart" >
+                                    <i class="heartt material-icons  material-heart2">favorite</i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="item-bottom text-dark">
-                        <h3>WASHINGTON</h3>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
+                        <div class="item-bottom text-dark">
+                            <h3>{{travel}}</h3>
+                            <hr>
+                            <p>{{description}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="carousel-item carousel-inner-resp">
-            <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
-                <div class="shadow h-100 w-100">
-                    <div class="item2-top d-flex justify-content-end">
-                        <div>
-                            <a class="back-heart" >
-                                <i class="heartt material-icons  material-heart2">favorite</i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item-bottom text-dark">
-                        <h3>DUBLÍN</h3>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item carousel-inner-resp">
-            <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
-                <div class="shadow h-100 w-100">
-                    <div class="item3-top d-flex justify-content-end">
-                        <div>
-                            <a class="back-heart" >
-                                <i class="heartt material-icons  material-heart2">favorite</i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item-bottom text-dark">
-                        <h3>PARÍS</h3>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="carousel-item carousel-inner-resp">
-            <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
-                <div class="shadow h-100 w-100">
-                    <div class="item4-top d-flex justify-content-end">
-                        <div>
-                            <a class="back-heart" >
-                                <i class="heartt material-icons  material-heart2">favorite</i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item-bottom text-dark">
-                        <h3>PEKÍN</h3>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="carousel-item carousel-inner-resp">
-            <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
-                <div class="shadow h-100 w-100">
-                    <div class="item4-top d-flex justify-content-end">
-                        <div>
-                            <a class="back-heart" >
-                                <i class="heartt material-icons  material-heart2">favorite</i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item-bottom text-dark">
-                        <h3>PEKÍN</h3>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="carousel-item carousel-inner-resp">
-            <div class="container-fluid carousel-container d-flex flex-column justify-content-center">
-                <div class="shadow h-100 w-100">
-                    <div class="item4-top d-flex justify-content-end">
-                        <div>
-                            <a class="back-heart" >
-                                <i class="heartt material-icons  material-heart2">favorite</i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item-bottom text-dark">
-                        <h3>PEKÍN</h3>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, deserunt dicta dolor error et, ex ipsum iste laboriosam laborum nam odio</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev prev-dest" href="#carouselDestinos" role="button" data-slide="prev">
-            <i class="material-icons mi-black">keyboard_arrow_left</i>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next next-dest" href="#carouselDestinos" role="button" data-slide="next">
-            <i class="material-icons mi-black">keyboard_arrow_right</i>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
+        {{/if}}
+    {{/each}}
 </section>
 
 <section class="hidden-resp">
@@ -206,93 +104,6 @@
 
         </div>
     </div>
-</section>
-              <!--  <div class="col-12 col-md-4 destinos-item is-showing">
-                    <div class="destino destino-washington d-flex justify-content-between">
-                        <div class="price d-flex align-items-center justify-content-center align-self-end">1.150 &euro;</div>
-                        <a class="back-heart" >
-                            <i class="heartt material-icons  material-heart2">favorite</i>
-                        </a>
-                    </div>
-                    <div class="descripcion-destino">
-                        <p class="type-travell">
-                            <i class="material-icons type">location_on</i>
-                            Histórico
-                        </p>
-                        <h1>Washington, EE.UU.</h1>
-                        <p>Disfruta de un país increible.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 destinos-item is-showing">
-                    <div class="destino destino-irlanda d-flex justify-content-between">
-                        <div class="price d-flex align-items-center justify-content-center align-self-end">250 &euro;</div>
-                        <a class="back-heart" >
-                            <i class="heartt material-icons  material-heart2">favorite</i>
-                        </a>
-                    </div>
-                    <div class="descripcion-destino">
-                        <p class="type-travell">
-                            <i class="material-icons type">location_on</i>
-                            Naturaleza
-                        </p>
-                        <h1>Waterford, Irlanda</h1>
-                        <p>Unas vistas inolvidables.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 destinos-item is-showing">
-                    <div class="destino destino-pekin d-flex justify-content-between">
-                        <div class="price d-flex align-items-center justify-content-center align-self-end">1.650 &euro;</div>
-                        <a class="back-heart" >
-                            <i class="heartt material-icons  material-heart2">favorite</i>
-                        </a>
-                    </div>
-                    <div class="descripcion-destino">
-                        <p class="type-travell">
-                            <i class="material-icons type">location_on</i>
-                            Aventurero
-                        </p>
-                        <h1>Pekín, China</h1>
-                        <p>Un destino milenario.</p>
-                    </div>
-                </div>
-
-
-                <div class="col-12 col-md-4 destinos-item is-showing">
-                    <div class="destino destino-india d-flex justify-content-between">
-                        <div class="price d-flex align-items-center justify-content-center align-self-end">500 &euro;</div>
-                        <a class="back-heart" >
-                            <i class="heartt material-icons  material-heart2">favorite</i>
-                        </a>
-                    </div>
-                    <div class="descripcion-destino">
-                        <p class="type-travell">
-                            <i class="material-icons type">location_on</i>
-                            Rincones insólitos
-                        </p>
-                        <h1>Agra, India</h1>
-                        <p>Descubre una nueva cultura.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 destinos-item is-showing">
-                    <div class="destino destino-cartagena d-flex justify-content-between">
-                        <div class="price d-flex align-items-center justify-content-center align-self-end">650 &euro;</div>
-                        <a class="back-heart" >
-                            <i class="heartt material-icons  material-heart2">favorite</i>
-                        </a>
-                    </div>
-                    <div class="descripcion-destino">
-                        <p class="type-travell">
-                            <i class="material-icons type">location_on</i>
-                            Histórico
-                        </p>
-                        <h1>Cartagena, Colombia</h1>
-                        <p>Un lugar con mucho color.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
 
 <section class="overHidden">
     <div class="quienes-somos d-flex align-items-center">

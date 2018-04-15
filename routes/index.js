@@ -2,7 +2,11 @@ var express = require('express');
 var router = express.Router();
 var travelModel = require('../models/travelModel');
 var userModel = require('../models/userModel');
+var bcrypt = require('bcrypt-nodejs');
 
+const Email = require('../config/emailConf');
+const Hbs = require('nodemailer-express-handlebars');
+const Path = require('path'); //Módulo para registrar el path
 const Multer = require('multer');
 const upload = require('../config/multer');
 
@@ -151,9 +155,12 @@ router.get('/userstable/userDelete/:id', (req,res,next)=> {
 });
 
 
-//INSERTAR EN LA BASE DE DATOS
+//REGISTRO DE USUARIO
 
 router.post('/insert',(req,res,next)=>{
+
+    var hash = bcrypt.hashSync(req.body.password);
+
     var pswEnc = (function(){
         var hash = 0;
         for (i = 0; i < req.body.passw.length; i++) {
@@ -163,25 +170,70 @@ router.post('/insert',(req,res,next)=>{
         }
         return hash;
     })();
-    const USERS ={
+    var hashGen = (function () {
+       var hash = 0;
+       for (i = 0; i<req.body.username.length; i++){
+           char = req.body.username.charCodeAt(i);
+           hash = ((hash<<5)-hash)+char;
+           hash = hash & hash;
+       }
+       return hash;
+    })();
+
+    const user ={
         "username": req.body.username,
         "email": req.body.email,
-        "password": pswEnc
+        "password": pswEnc,
+        "hash": hash
     };
-    userModel.insert(USERS,(error, insertUSR)=>{
-        if(insertUSR){
-            res.render('login.hbs', {
-                title: 'G H T Login',
-                layout: 'layout',
-                registroCorrecto: true
-            });
-        } else
-        res.status(500).json('Error al crear usuario'+ error);
+
+    userModel.insert(user,(error, insertUSR)=>{
+        if(error) res.status(500).json('Error al crear usuario'+ error);
+        switch(insertUSR)
+        {
+            case 1:
+                req.flash('errorUsuario','El usuario ya existe, inténtelo de nuevo');
+                res.redirect('/registro');
+                break;
+            case 2:
+                req.flash('errorEmail','El email ya existe, inténtelo de nuevo');
+                res.redirect('registro');
+                break;
+            case 3:
+                let hash2=user.hash;
+                let hashEncode=encodeURIComponent(hash2);
+
+                Email.transporter.use('compile', Hbs ({
+                    viewEngine: 'hbs',
+                    extName:'.hbs',
+                    viewPath: Path.join(__dirname,'../views/emailTemplates')
+                }));
+
+                let message = {
+                    to: user.email,
+                    subject : 'Geekshubs Travel - Activar Cuenta',
+                    template:'email'
+                };
+                Email.transporter.sendMail(message,(error,info) =>{
+                    if(error){
+                        res.status(500).send(error);
+                        return
+                    }
+                    Email.transporter.close();
+                    res.status(200).send('Respuesta "%s"' + info.response);
+                });
+                res.render('login.hbs', {
+                    title: 'G H T Login',
+                    layout: 'layout',
+                    registroCorrecto: true
+                });
+                break;
+        }
     })
 });
 
 
-//RECUPERAR DE LA BASE DE DATOS
+//LOGIN DE USUARIO
 
 router.post('/retrieve',(req,res,next)=>{
     var pswEnc = (function(){
@@ -196,7 +248,9 @@ router.post('/retrieve',(req,res,next)=>{
     const USERS={
         "user": req.body.username,
         "pw": pswEnc
+
     };
+
     userModel.fetchUser([USERS],(error, retrieveUser)=>{
         if(retrieveUser){
             req.session.username = USERS.user;
@@ -213,10 +267,24 @@ router.post('/retrieve',(req,res,next)=>{
     })
 });
 
+// ACTIVACION USUARIO
 
+router.get('/activate/:hash', (req,res,next)=>{
+
+});
+
+router.get('/recoverpw', (req,res,next)=>{
+
+});
+
+router.get('/userstable/deactivateUser/:id', (req, res, next)=>{
+    userModel.deactivateUser(req.params.id, (error, cb)=>{
+        if(error) res.status(500).json(error);
+        else res.redirect('/userstable');
+    })
+});
 
 /*
-
 router.get('/*', function(req, res, next) {
     permisos = req.session.isAdmin;
     sesion = req.session.username;
@@ -226,7 +294,7 @@ router.get('/*', function(req, res, next) {
         title: 'Oops!',
         layout: 'layout'
     });
-}); */
+});*/
 
 
 

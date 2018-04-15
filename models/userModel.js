@@ -21,12 +21,23 @@ Users.fetchAll = (cb)=>{
 
 Users.insert = (user,cb)=>{
     if(!conn) return cb("No se ha podido crear la conexion");
-    conn.query('INSERT INTO users SET ?',[user], (error, result)=>{
+    conn.query('SELECT * FROM users WHERE username=?',[user.username],(error,result)=>{
         if(error) return cb(error);
-        console.log(result);
-        return cb(null, result);
-    })
-};
+        if (result != ''){
+            return cb(null,1);
+        } else {
+            conn.query('SELECT * FROM users WHERE email=?',[user.email],(error,result)=>{
+                if(error) return cb(error);
+                if (result != ''){
+                    return cb(null,2);
+                } else {
+                    conn.query('INSERT INTO users SET ?',[user],(error,result)=>{
+                        if(error) return cb(error);
+                        return cb(null,3);
+                    })}
+            })}
+    })};
+
 
 Users.fetchUser = ([user], cb)=>{
     if(!conn) return cb("No se ha podido crear la conexión");
@@ -45,6 +56,11 @@ Users.fetchUsersT = (cb)=>{
         if(error) return cb(error);
         else return cb(null, rows);
     })
+};
+
+Users.fetchHash = (cb)=>{
+    if(!conn) return cb("No hay conexion");
+    const SQL = "SELECT * FROM";
 };
 
 Users.deactivateUser = (id,cb)=>{
@@ -80,6 +96,18 @@ Users.userDelete=(id,cb)=>{
 };
 
 
+Users.activate = (hash, cb) => {
+  if (!conn) return cb("No se ha podido realizar la conexión");
+  conn.query("SELECT * FROM users WHERE hash=?")
+};
+
+Users.recover = (id, cb) => {
+    if (!conn) return cb("No se ha podido realizar la conexión");
+    conn.query("SELECT * FROM users WHERE email=?", id, function() {
+        if(error) return cb(error);
+        return cb(null, resultado);
+    })
+};
 
 module.exports = Users;
 
