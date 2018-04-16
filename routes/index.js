@@ -159,17 +159,8 @@ router.get('/userstable/userDelete/:id', (req,res,next)=> {
 
 router.post('/insert',(req,res,next)=>{
 
-    var hash = bcrypt.hashSync(req.body.password);
-
-    var pswEnc = (function(){
-        var hash = 0;
-        for (i = 0; i < req.body.passw.length; i++) {
-            char = req.body.passw.charCodeAt(i);
-            hash = ((hash<<5)-hash)+char;
-            hash = hash & hash; // Convert to 32bit integer
-        }
-        return hash;
-    })();
+    var hash = bcrypt.hashSync(req.body.username);
+    var pswEnc = bcrypt.hashSync(req.body.password);
 
     const user ={
         "username": req.body.username,
@@ -199,9 +190,8 @@ router.post('/insert',(req,res,next)=>{
                 });
                 break;
             case 3:
-                let hash2=user.hash;
-                let hashEncode=encodeURIComponent(hash2);
-
+                let hash2 =user.hash;
+                let hashEncode=encodeURIComponent(user.hash);
                 Email.transporter.use('compile', Hbs ({
                     viewEngine: 'hbs',
                     extName:'.hbs',
@@ -213,7 +203,7 @@ router.post('/insert',(req,res,next)=>{
                     subject : 'Geekshubs Travel - Activar Cuenta',
                     template:'email',
                     context:{
-                        hash: user.hash
+                        hashEncode: hashEncode // no tienes que poner eso amigo , tienes que poner hashEncode
                     },
                 }
 
@@ -239,15 +229,7 @@ router.post('/insert',(req,res,next)=>{
 //LOGIN DE USUARIO
 
 router.post('/retrieve',(req,res,next)=>{
-    var pswEnc = (function(){
-        var hash = 0;
-        for (i = 0; i < req.body.passwd.length; i++) {
-            char = req.body.passwd.charCodeAt(i);
-            hash = ((hash<<5)-hash)+char;
-            hash = hash & hash; // Convert to 32bit integer
-        }
-        return hash;
-    })();
+    var pswEnc = bcrypt.hashSync(req.body.password);
     const USERS={
         "user": req.body.username,
         "pw": pswEnc
@@ -273,11 +255,13 @@ router.post('/retrieve',(req,res,next)=>{
 // ACTIVACION USUARIO
 
 router.get('/activate/:hash', (req,res,next)=>{
-    userModel.activate(req.params.hash, (error, cb)=>{
+    let hash = decodeURIComponent(req.params.hash);
+    userModel.activate(hash, (error, cb)=>{
         if(error) res.status(500).json(error);
         else res.redirect('/login');
     })
 });
+
 
 router.get('/recoverpw', (req,res,next)=>{
 

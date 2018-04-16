@@ -60,10 +60,10 @@ Users.fetchUsersT = (cb)=>{
 
 Users.activate = (hash, cb)=>{
     if(!conn) return cb("No hay conexion");
-    conn.query = "UPDATE users SET active=1 WHERE hash=?", hash, function(error,resultado){
+    conn.query("UPDATE users SET active=1 WHERE hash=?", hash, function(error,resultado){
         if(error) return cb(error);
         else return cb(null, resultado);
-    };
+    });
 };
 
 Users.deactivateUser = (id,cb)=>{
