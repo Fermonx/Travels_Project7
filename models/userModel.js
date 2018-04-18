@@ -60,9 +60,10 @@ Users.fetchUsersT = (cb)=>{
 
 Users.activate = (hash, cb)=>{
     if(!conn) return cb("No hay conexion");
-    conn.query("UPDATE users SET active=1 WHERE hash=?", hash, function(error,resultado){
-        if(error) return cb(error);
-        else return cb(null, resultado);
+    console.log(hash);
+    conn.query("UPDATE users SET active='1' WHERE hash=?", [hash], function(error,resultado){
+      if(error) return cb(error);
+     else return cb(null, resultado);
     });
 };
 
@@ -99,10 +100,6 @@ Users.userDelete=(id,cb)=>{
 };
 
 
-Users.activate = (hash, cb) => {
-  if (!conn) return cb("No se ha podido realizar la conexión");
-  conn.query("SELECT * FROM users WHERE hash=?")
-};
 
 Users.recover = (id, cb) => {
     if (!conn) return cb("No se ha podido realizar la conexión");
@@ -111,6 +108,23 @@ Users.recover = (id, cb) => {
         return cb(null, resultado);
     })
 };
+
+Users.paginate = (offset, limit, cb)=>{
+    if(!conn) return cb("No se ha realizado la conexión");
+    conn.query("SELECT * FROM users LIMIT ?, ?", [offset, limit],(error,rows)=>{
+        if(error)
+        {
+            return cb(error);
+        }
+        else
+            {
+            conn.query("SELECT COUNT(*) as total FROM users",(error,count)=>{
+                if(error) return cb(error);
+                else return cb(null,{count,rows});
+            })
+        }
+    })
+}
 
 module.exports = Users;
 

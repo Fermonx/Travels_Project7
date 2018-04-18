@@ -7,18 +7,40 @@ const session = require('express-session');
 const bodyParser = require("body-parser");
 const flash = require ('connect-flash');
 
+var pagination = require('express-paginate');
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const admins = require ('./routes/admins');
 const log = require ('./routes/log');
 const mailer = require('./routes/mailer');
+const paginate = require('./routes/pagination');
 const winston = require('./config/winston');
 const multer = require('./config/multer');
 
+
 const app = express();
 
+//SIEMPRE VA INMEDIATAMENTE DESPUES DE app = express
+app.use(paginate.middleware(2,20));
 
+//VARIABLE ENTORNO
+let env = process.env.NODE_ENV || 'desarrollo';
+let config = require('./config/config')[env];
+
+switch(env)
+{
+    case 'desarrollo':
+        console.log(config.SERVER);
+        console.log(config.PORT);
+        break;
+
+    case 'produccion':
+        console.log(config.SERVER);
+        console.log(config.PORT);
+        break;
+}
 
 
 //map the components folder as a route
@@ -29,11 +51,15 @@ app.use('/components', express.static(`${__dirname}/public/components`));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+
+
 var hbs = require('hbs');
 hbs.registerPartials(`${__dirname}/views/partials`);
 
 var hbsUtils = require('hbs-utils')(hbs);
 hbsUtils.registerWatchedPartials(`${__dirname}/views/partials`);
+require('./helpers/hbs')(hbs);
+
 
 app.use(morgan('dev'));
 app.use(morgan('combined',{stream: winston.stream}));

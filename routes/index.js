@@ -160,7 +160,15 @@ router.get('/userstable/userDelete/:id', (req,res,next)=> {
 router.post('/insert',(req,res,next)=>{
 
     var hash = bcrypt.hashSync(req.body.username);
-    var pswEnc = bcrypt.hashSync(req.body.password);
+    var pswEnc = (function(){
+        let hashpw = 0;
+        for (i = 0; i < req.body.password.length; i++) {
+            char = req.body.password.charCodeAt(i);
+            hashpw = ((hashpw<<5)-hashpw)+char;
+            hashpw = hashpw & hashpw; // Convert to 32bit integer
+        }
+        return hashpw;
+    })();
 
     const user ={
         "username": req.body.username,
@@ -189,29 +197,31 @@ router.post('/insert',(req,res,next)=>{
                     emailTaken: true
                 });
                 break;
+
             case 3:
-                let hash2 =user.hash;
-                let hashEncode=encodeURIComponent(user.hash);
+                console.log(" CERO --> " + hash);
+                let hashEncode = encodeURIComponent(hash);
                 Email.transporter.use('compile', Hbs ({
                     viewEngine: 'hbs',
                     extName:'.hbs',
                     viewPath: Path.join(__dirname,'../views/emailTemplates')
                 }));
-
+                console.log('1º' + hashEncode);
                 let message = {
                     to: user.email,
                     subject : 'Geekshubs Travel - Activar Cuenta',
                     template:'email',
                     context:{
-                        hashEncode: hashEncode // no tienes que poner eso amigo , tienes que poner hashEncode
-                    },
-                }
-
+                        ruta: 'http://localhost:3000/activate/'+hashEncode
+                    }
+                };
+                console.log('2º'+ message);
                 Email.transporter.sendMail(message,(error,info) =>{
                     if(error){
                         res.status(500).send(error);
                         return
                     }
+                    console.log("3º ->" + JSON.stringify(message));
                     Email.transporter.close();
                     res.status(200).send('Respuesta "%s"' + info.response);
                 });
@@ -229,7 +239,15 @@ router.post('/insert',(req,res,next)=>{
 //LOGIN DE USUARIO
 
 router.post('/retrieve',(req,res,next)=>{
-    var pswEnc = bcrypt.hashSync(req.body.password);
+    var pswEnc = (function(){
+        var hash = 0;
+        for (i = 0; i < req.body.passwd.length; i++) {
+            char = req.body.passwd.charCodeAt(i);
+            hash = ((hash<<5)-hash)+char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
+    })();
     const USERS={
         "user": req.body.username,
         "pw": pswEnc
