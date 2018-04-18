@@ -1,6 +1,6 @@
 # Project_7
 
-Sixth project for the Geekshubs Academy Bootcamp.
+Seventh project for the Geekshubs Academy Bootcamp.
 
 Functions to achieve this week:
 
