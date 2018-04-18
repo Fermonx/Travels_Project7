@@ -1,15 +1,15 @@
-# Project_6
+# Project_7
 
 Sixth project for the Geekshubs Academy Bootcamp.
 
 Functions to achieve this week:
 
-  - A functioning User control panel for the Administrator in which he see the list of all users and can activate or deactivate users manually.
+  - A functioning Checkout view to buy travels.
   
-  - Use nodemailer to send a verification email when a new user registers to avoid ghost accounts and spam
+  - Implement Sequelize
   
-  - Use nodemailer to send another email when the user asks for a new password with the "Forgot my Password" form
+  - Implement Passport to better handle the user sessions
   
-  - Use Multer to make the images of the travels be accessible from the server, this includes, adding and removing them.
+  - Implement pagination for the userstable and admintable views.
   
  
