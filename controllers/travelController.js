@@ -1,15 +1,40 @@
-let travelModel = require('../models/sequelizeTravelModel');
+const Multer = require('multer');
+const upload = require('../config/multer');
+let travelModels = require('../models/sequelizeTravelModel');
 let travelController = {};
+
+
 //const paginate = require('express-paginate');
 
 travelController.getTravels = function(req,res,next)
 {
-  travelModel.findAll().then()
+  travelModels.findAll({where:{active: 1}}).then(retrieveTravel=>{
+      if(retrieveTravel){
+      res.render('index',{
+          title: 'Geekshub Tours',
+          layout: 'layout',
+          retrieveTravel: retrieveTravel
+      });
+      }
+  })
+};
+
+travelController.getTravelsAdmin = function(req,res,next)
+{
+  travelModels.findAll({where:{id}}).then(travelPanel=>{
+      if(travelPanel)
+      {
+          res.render('admin', {
+              title: 'ADMIN VIEW',
+              layout: 'layout',
+              travelPanel: travelPanel
+          });
+      }
+  })
 };
 
 
-// PANEL ADMINISTRACION DE VIAJES
-
+/*
 router.get('/admintable', function (req, res, next)
 {
     permisos = req.session.isAdmin;
@@ -29,42 +54,6 @@ router.get('/admintable', function (req, res, next)
         });
     }
     else res.redirect('/');
-});
-
-
-router.get('/admintable/hideTravel/:id', (req, res, next)=>{
-    travelModel.hideTravel(req.params.id, (error, cb)=>{
-        if(error) res.status(500).json(error);
-        else res.redirect('/admintable');
-    })
-});
-
-router.post('/admintable/create',upload.single('file'), function (req,res,next) {
-    console.log(req.file);
-    let travel={
-        travel:req.body.travel,
-        description:req.body.description,
-        price:req.body.price,
-        tipo:req.body.tipo,
-        image:req.file.path
-    };
-    travel.image = travel.image.replace("\\", "/");
-    travelModel.travelCreate(travel,(error,trav)=>{
-        if(error) res.status(500).json(error);
-        else{
-            res.redirect('/admintable');
-        }
-    })
-
-});
-
-router.get('/admintable/travelDelete/:id', (req,res,next)=> {
-    travelModel.travelDelete(req.params.id,(error,cb)=>{
-        if(error) res.status(500).json(error);
-        else{
-            res.redirect('/admintable');
-        }
-    })
-});
+});*/
 
 module.exports = travelController;

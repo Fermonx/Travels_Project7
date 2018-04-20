@@ -1,7 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var mailController = require('../controllers/mailController');
-const email = require('../config/emailConf');
+const  express = require('express');
+const router = express.Router();
+const mailController = require('../controllers/mailController');
 
+router.get('/activate/:hash', (req,res,next)=>{
+    mailController.activate(req,res,next);
+});
 
 module.exports = router;

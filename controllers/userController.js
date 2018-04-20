@@ -6,9 +6,13 @@ let usersModel = require('../models/sequelizeUserModel');
 let Email= require('../config/emailConf');
 let Hbs = require('nodemailer-express-handlebars');
 let Path = require('path');
+let passport = require('passport');
+let localStrat = require('passport-local').Strategy;
 let userController = {};
 
-
+passport.serializeUser((user, done)=>{
+   done(null, user.id);
+});
 
 
 //REGISTRO DE USUARIO
@@ -30,8 +34,8 @@ userController.register = function(req, res, next)
 
 userController.insert = function(req,res,next)
 {
-    var hash = bcrypt.hashSync(req.body.username);
-    var pswEnc = (function(){
+    let hash = bcrypt.hashSync(req.body.username);
+    let pswEnc = (function(){
         let hashpw = 0;
         for (i = 0; i < req.body.password.length; i++) {
             char = req.body.password.charCodeAt(i);
@@ -58,16 +62,14 @@ userController.insert = function(req,res,next)
                     extName:'.hbs',
                     viewPath: Path.join(__dirname,'../views/emailTemplates')
                 }));
-                console.log('1º' + hashEncode);
                 let message = {
                     to: user.email,
                     subject : 'Geekshubs Travel - Activar Cuenta',
                     template:'email',
                     context:{
-                        ruta: 'http://localhost:3000/activate/'+hashEncode
+                        ruta: 'http://localhost:3000/mailer/activate/'+hashEncode
                     }
                 };
-                console.log('2º'+ message);
                 Email.transporter.sendMail(message,(error,info) =>{
                     if(error){
                         res.status(500).send(error);
@@ -86,24 +88,14 @@ userController.insert = function(req,res,next)
                 res.render('register', {
                     title: 'G H T Registro',
                     layout: 'layout',
-                    userTaken: true
+                    emailTaken: true
                 })
             }
     })
 
 };
 
-// ACTIVACION USUARIO
-
-router.get('/activate/:hash', (req,res,next)=>{
-    let hash = decodeURIComponent(req.params.hash);
-    userModel.activate(hash, (error, cb)=>{
-        if(error) res.status(500).json(error);
-        else res.redirect('/login');
-    })
-});
-
-
+//LOGIN DE USUARIO
 
 userController.login = function(req, res, next)
 {
@@ -117,22 +109,49 @@ userController.login = function(req, res, next)
     });
 };
 
+userController.retrieve = function(req,res,next){
+    var pswEnc = (function(){
+        var hash = 0;
+        for (i = 0; i < req.body.passwd.length; i++) {
+            char = req.body.passwd.charCodeAt(i);
+            hash = ((hash<<5)-hash)+char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
+    })();
+    const USERS={
+        "email": req.body.email,
+        "pw": pswEnc
+    };
+
+    usersModel.findOne({where:{email: USERS.email},defaults:{password: USERS.pw}}).then(log=>{
+        if (log)
+        {
+            req.session.username = USERS.user;
+            res.redirect('/');
+        }
+        else
+        {
+            res.render('login',{
+                title:'GH Travels',
+                layout: 'layout',
+                loginIncorrecto: true
+            });
+        }
+    });
+};
 
 //PANEL ADMINISTRACION DE USUARIOS
 
 router.get('/userstable', function (req, res, next)
 {
-    permisos = req.session.isAdmin;
-    sesion = req.session.username;
-    if(permisos === 1)
+    if(permisos == 1)
     {
         userModel.fetchUsersT((error,retrieveUser)=>{
             if(retrieveUser){
                 res.render('userstable.hbs', {
                     title:'ADMIN VIEW',
                     layout: 'layout',
-                    isAdmin: permisos,
-                    isUser: sesion,
                     retrieveUser: retrieveUser
                 });
             }
@@ -159,44 +178,6 @@ router.get('/userstable/userDelete/:id', (req,res,next)=> {
     })
 });
 
-
-
-
-
-//LOGIN DE USUARIO
-/*
-userController.retriee('/retrieve',(req,res,next)=>{
-    var pswEnc = (function(){
-        var hash = 0;
-        for (i = 0; i < req.body.passwd.length; i++) {
-            char = req.body.passwd.charCodeAt(i);
-            hash = ((hash<<5)-hash)+char;
-            hash = hash & hash; // Convert to 32bit integer
-        }
-        return hash;
-    })();
-    const USERS={
-        "user": req.body.username,
-        "pw": pswEnc
-
-    };
-
-    userModel.fetchUser([USERS],(error, retrieveUser)=>{
-        if(retrieveUser){
-            req.session.username = USERS.user;
-            if(retrieveUser[0].admin) req.session.isAdmin = true;
-
-            res.redirect('/')
-        }else{
-            res.render('login.hbs',{
-                title: 'GHT',
-                layout: 'layout',
-                loginIncorrecto: true
-            });
-        }
-    })
-});
-*/
 
 router.get('/recoverpw', (req,res,next)=>{
 

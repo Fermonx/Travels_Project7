@@ -1,23 +1,24 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
-const session = require('express-session');
-const bodyParser = require("body-parser");
-const flash = require ('connect-flash');
-const pagination = require('express-paginate');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let morgan = require('morgan');
+let session = require('express-session');
+let bodyParser = require("body-parser");
+let flash = require ('connect-flash');
+let pagination = require('express-paginate');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const admins = require ('./routes/admins');
-const mailer = require('./routes/mailer');
-const paginate = require('./routes/pagination');
-const winston = require('./config/winston');
-const multer = require('./config/multer');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let admins = require ('./routes/admins');
+let mailer = require('./routes/mailer');
+let paginate = require('./routes/pagination');
+
+let winston = require('./config/winston');
+let multer = require('./config/multer');
 
 
-const app = express();
+let app = express();
 
 //SIEMPRE VA INMEDIATAMENTE DESPUES DE app = express
 //app.use(paginate.middleware(2,20));
@@ -74,6 +75,14 @@ app.use(session({
     saveUninitialized: true //Sin esto hay navegadores que no generan la cookie, utilizar a pesar de estar deprecated.
 }));
 app.use(flash());
+
+
+app.use(Passport.initialize());
+app.use(Passport.session());
+app.use((req,res,next)=>{
+    res.locals.user= req.user;
+    next();
+});
 
 
     //Routes
