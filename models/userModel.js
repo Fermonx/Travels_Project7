@@ -21,17 +21,18 @@ Users.fetchAll = (cb)=>{
 
 Users.insert = (user,cb)=>{
     if(!conn) return cb("No se ha podido crear la conexion");
-    conn.query('SELECT * FROM users WHERE username=?',[user.username],(error,result)=>{
+    conn.query('SELECT * FROM users WHERE username=?',[user.email],(error,result)=>{
         if(error) return cb(error);
-        if (result != ''){
+        if (!result){
             return cb(null,1);
         } else {
             conn.query('SELECT * FROM users WHERE email=?',[user.email],(error,result)=>{
                 if(error) return cb(error);
-                if (result != ''){
+                if (!result){
                     return cb(null,2);
                 } else {
                     conn.query('INSERT INTO users SET ?',[user],(error,result)=>{
+                        console.log("SE inserta el usuario");
                         if(error) return cb(error);
                         return cb(null,3);
                     })}
@@ -44,10 +45,12 @@ Users.fetchUser = ([user], cb)=>{
     const SQL = "SELECT * FROM users WHERE username=?";
     conn.query(SQL, user.user, (error, rows)=>{
         if (error) return cb(error);
-        if(user.pw == rows[0].password) return cb(null, rows);
+        if(user.pw === rows[0].password) return cb(null, rows);
         else return cb(null, false);
     })
 };
+
+
 
 Users.fetchUsersT = (cb)=>{
     if(!conn) return cb("No se ha podido crear la conexión");
@@ -73,7 +76,7 @@ Users.deactivateUser = (id,cb)=>{
         if(error) return cb(error);
         else{
             let valorActivo = resultado[0].active;
-            if(valorActivo == 1) valorActivo = 0;
+            if(valorActivo === 1) valorActivo = 0;
             else valorActivo = 1;
             conn.query("UPDATE users SET active="+valorActivo+" WHERE id=?",id,function() {
                 if (error) return cb(error);
@@ -111,7 +114,7 @@ Users.recover = (id, cb) => {
 
 Users.paginate = (offset, limit, cb)=>{
     if(!conn) return cb("No se ha realizado la conexión");
-    conn.query("SELECT * FROM users LIMIT ?, ?", [offset, limit],(error,rows)=>{
+    conn.query("SELECT * FROM users LIMITS ?, ?", [offset, limit],(error,rows)=>{
         if(error)
         {
             return cb(error);
@@ -127,25 +130,3 @@ Users.paginate = (offset, limit, cb)=>{
 }
 
 module.exports = Users;
-
-
-//+user.user+"' and password ='"+user.pw+"'"
-
-/*
-function saveUser(hash, req, res){
-    const USERS ={
-        "username": req.body.username,
-        "email": req.body.email,
-        "password": hash
-    };
-    userModel.insert(USERS,(error, insertUSR)=>{
-        if(insertUSR){
-            res.render('login.hbs', {
-                title: 'G H T Login',
-                layout: 'layout',
-                registroCorrecto: true
-            });
-        } else
-            res.status(500).json('Error al crear usuario'+ error);
-    })
-}*/

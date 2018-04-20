@@ -13,7 +13,6 @@ travels.fetchTravel = (cb)=>{
 };
 
 
-
 travels.hideTravel = (id, cb)=>{
     if(!conn) return cb("No se ha podido crear la conexión");
     conn.query("SELECT * FROM travels WHERE id=?", id ,function(error,resultado){

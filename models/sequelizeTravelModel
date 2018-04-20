@@ -1,0 +1,25 @@
+let connector = require('../config/connector');
+let sequelize =  require('sequelize');
+
+const travel = connector.define('travels',{
+    travel:{
+        type: sequelize.STRING(45)
+    },
+    description:{
+        type: sequelize.STRING(80)
+    },
+    active:{
+        type: sequelize.INTEGER(11)
+    },
+    price:{
+        type: sequelize.STRING(45)
+    },
+    tipo:{
+        type: sequelize.STRING(45)
+    },
+    image:{
+        type: sequelize.STRING(80)
+    }
+});
+
+module.exports = travel;

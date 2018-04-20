@@ -6,14 +6,11 @@ const morgan = require('morgan');
 const session = require('express-session');
 const bodyParser = require("body-parser");
 const flash = require ('connect-flash');
-
-var pagination = require('express-paginate');
-
+const pagination = require('express-paginate');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const admins = require ('./routes/admins');
-const log = require ('./routes/log');
 const mailer = require('./routes/mailer');
 const paginate = require('./routes/pagination');
 const winston = require('./config/winston');
@@ -23,11 +20,11 @@ const multer = require('./config/multer');
 const app = express();
 
 //SIEMPRE VA INMEDIATAMENTE DESPUES DE app = express
-app.use(paginate.middleware(2,20));
+//app.use(paginate.middleware(2,20));
 
 //VARIABLE ENTORNO
-let env = process.env.NODE_ENV || 'desarrollo';
-let config = require('./config/config')[env];
+const env = process.env.NODE_ENV || 'desarrollo';
+const config = require('./config/config')[env];
 
 switch(env)
 {
@@ -53,12 +50,12 @@ app.set('view engine', 'hbs');
 
 
 
-var hbs = require('hbs');
+const hbs = require('hbs');
 hbs.registerPartials(`${__dirname}/views/partials`);
 
-var hbsUtils = require('hbs-utils')(hbs);
+const hbsUtils = require('hbs-utils')(hbs);
 hbsUtils.registerWatchedPartials(`${__dirname}/views/partials`);
-require('./helpers/hbs')(hbs);
+//require('./helpers/hbs')(hbs);
 
 
 app.use(morgan('dev'));
@@ -71,22 +68,20 @@ app.use( "/uploads", express.static( path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.use(session({
-    secret: '12345',
-    name: 'Session',
+    secret: 'SecretKey',
+    name: 'SessionCookie',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true //Sin esto hay navegadores que no generan la cookie, utilizar a pesar de estar deprecated.
 }));
-
 app.use(flash());
 
 
     //Routes
-app.use('/admins',admins);
-app.use('/log',log);
-app.use('/', indexRouter);
-app.use('/views', usersRouter);
-app.use('/mailer', mailer);
 
+app.use('/views', usersRouter);
+app.use('/admins',admins);
+app.use('/mailer', mailer);
+app.use('/', indexRouter);
 
     //URL Encode
 app.use(bodyParser.urlencoded({ extended: false }));
