@@ -1,6 +1,8 @@
 let connector = require('../config/connector');
 let sequelize =  require('sequelize');
 
+let Users = {};
+
 const User = connector.define('users',{
    username:{
        type: sequelize.STRING(45)
@@ -22,4 +24,12 @@ const User = connector.define('users',{
     }
 });
 
-module.exports = User;
+Users.login = (usuario,cb)=>{
+    User.findOne({where:{email:usuario.email}}).then((usuario)=>{
+        return cb(null,usuario);
+    }).error((error)=>{
+        return cb(error);
+    })
+};
+
+module.exports = Users;

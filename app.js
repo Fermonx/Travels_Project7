@@ -7,12 +7,15 @@ let session = require('express-session');
 let bodyParser = require("body-parser");
 let flash = require ('connect-flash');
 let pagination = require('express-paginate');
-
+let passport = require('passport');
+let i18n = require('i18n');
+let sqlStore = require('connect-mssql')(session);
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 let admins = require ('./routes/admins');
 let mailer = require('./routes/mailer');
 let paginate = require('./routes/pagination');
+//let i18nruta = require('./routes/i18n');
 
 let winston = require('./config/winston');
 let multer = require('./config/multer');
@@ -68,22 +71,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use( "/uploads", express.static( path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
+i18n.configure({
+   locales:['es','en'],
+   cookie:'secret-lang',
+   directory: __dirname+'/locales',
+   defaultLocale: 'es'
+});
+
+app.use(i18n.init);
+
 app.use(session({
     secret: 'SecretKey',
     name: 'SessionCookie',
     resave: true,
+    //store: new sqlStore({}),
     saveUninitialized: true //Sin esto hay navegadores que no generan la cookie, utilizar a pesar de estar deprecated.
 }));
 app.use(flash());
-
-
-app.use(Passport.initialize());
-app.use(Passport.session());
-app.use((req,res,next)=>{
-    res.locals.user= req.user;
-    next();
-});
-
+app.use(passport.initialize());
+app.use(passport.session());
 
     //Routes
 
@@ -91,6 +97,16 @@ app.use('/views', usersRouter);
 app.use('/admins',admins);
 app.use('/mailer', mailer);
 app.use('/', indexRouter);
+//app.use('/i18n',i18nroute);
+
+
+app.get('/locale/:lang',(req,res,next)=>{
+   res.cookie(
+       'secret-lang',
+       req.params.lang
+   );
+     res.redirect('/');
+});
 
     //URL Encode
 app.use(bodyParser.urlencoded({ extended: false }));

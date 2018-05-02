@@ -22,8 +22,8 @@
                     <td>{{admin}}</td>
                     <td>{{active}}</td>
 
-                    <td><input type="checkbox"  onclick='window.location.assign("/userstable/deactivateUser/{{id}}")' {{#if active}}checked{{/if}}></td>
-                    <td><button type="button"  onclick='window.location.assign("/userstable/userDelete/{{id}}")' class="btn tabledelete"><i class="fas fa-trash"></i></button></td>
+                    <td><input type="checkbox"  onclick='window.location.assign("/admins/userstable/userHide/{{id}}")' {{#if active}}checked{{/if}}></td>
+                    <td><button type="button"  onclick='window.location.assign("/admins/userstable/userDelete/{{id}}")' class="btn tabledelete"><i class="fas fa-trash"></i></button></td>
                     <td><button type="button"  onclick='' class="btn tableres" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Petición: Reestablecer Password</b>" aria-describedby=""><i class="fas fa-envelope"></i></button></td>
                 </tr>
             {{/each}}

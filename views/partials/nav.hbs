@@ -1,4 +1,4 @@
-<nav class="stroke navbar navbar-light bg-light navbar-expand-lg nav-fixed ">
+<nav class="navbar navbar-light bg-light navbar-expand-lg nav-fixed ">
 
     <a class="navbar-brand col-3" href="/">
         <i class="fas fa-plane" href="#"></i>
@@ -12,28 +12,27 @@
         <div class="navbar-nav navbar-center" id="main-menu">
 
             <a class="nav-item nav-link" href="/">Viajes<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">¿Quiénes somos?</a>
-            <a class="nav-item nav-link" href="#">¿Dónde estamos?</a>
+            <a class="nav-item nav-link" href="/#nosotros">¿Quiénes somos?</a>
+            <a class="nav-item nav-link" href="/#contacto">¿Dónde estamos?</a>
             <a class="nav-item nav-link" href="/views/register">Registrate</a>
-
-
-
+            <a class="nav-item nav-link" href="/views/checkout">Carrito <i class="fas fa-shopping-cart"></i></a>
 
         </div>
+
 
     </div>
 
 
-    <div class="navbar-brand navbar-sess col-3 d-none d-lg-block" href="#">
+    <div class=" navbar-sess col-3 d-none d-lg-block" href="#">
         {{# if isAdmin}}
 
             <div class="dropdown">
                 <button class="btn dropdown-toggle dropbtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user" style="padding-right: 5px"></i>Admin
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="/userstable">Panel de Usuarios</a></li>
-                    <li><a href="/admintable">Panel de Viajes</a></li>
-                    <li><a href="/admins/destroy">Desconectar</a></li>
+                    <li><a href="/admins/userstable">Panel de Usuarios</a></li>
+                    <li><a href="/admins/admintable">Panel de Viajes</a></li>
+                    <li><a href="/views/logout">Desconectar</a></li>
 
                 </ul>
             </div>
@@ -46,7 +45,7 @@
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li><a href="#">Mi Perfil</a></li>
-                    <li><a href="/admins/destroy">Desconectar</a></li>
+                    <li><a href="/views/logout">Desconectar</a></li>
                 </ul>
             </div>
         {{/if}}
@@ -55,5 +54,3 @@
 
     </div>
 </nav>
-
-

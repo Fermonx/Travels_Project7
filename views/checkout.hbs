@@ -1,0 +1,47 @@
+<section>
+    <div id="login" class="checkout-wrapper d-flex align-items-center">
+        <div class="container container-destinos">
+            <div class="row d-flex justify-content-center row-contact">
+                <div class="col-8 form-checkout">
+                    <div class="contact-message">
+                        <h3><i class="fas fa-shopping-cart"></i> Viajes</h3>
+                    </div>
+                    <hr>
+                    {{#if noTravel}}<h5 class="contact-message">No tiene ningún viaje en su carrito</h5> {{/if}}
+                    {{#each carrito}}
+                    <div class="row d-flex destinos-items">
+                                <div class="col-4  is-showing">
+                                    <div class="destino-checkout d-flex justify-content-between" style="background-image: url({{image}}); background-color: white; background-size: cover; background-position: center;">
+                                        <div class="price d-flex align-items-center justify-content-center align-self-end">{{price}}€</div>
+                                    </div>
+                                    <div class="descripcion-destino">
+                                        <p class="type-travell">
+                                            <i class="material-icons type">location_on</i>
+                                            {{tipo}}
+                                        </p>
+                                        <h1>{{travel}}</h1>
+                                    </div>
+                                </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            <br/>
+            <div class="row d-flex justify-content-start row-contact">
+                <div class="offset-2 col-6 form-checkout-total">
+                    <div class="contact-message">
+                        <h3>Total</h3>
+                    </div>
+                    <hr>
+                    {{#each checkTravel}}
+                    <div class="row">
+                        <div class="checkout-total-item col-4">{{travel}}</div>
+                        <div class="checkout-total-item col-4">{{price}}€</div>
+                        <div class="checkout-total-item col-4">Cantidad: 1</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

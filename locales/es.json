@@ -1,0 +1,13 @@
+{
+  "hello": "hola",
+  "hello %s":"hola %s",
+  "%d poduct": {
+    "one": "%d producto",
+    "other": "%d productos"
+  }
+
+  "Travels": "Viajes",
+  "Travel": "Viaja",
+  "¿Quienes Somos?": "About Us",
+  "Sobre Nosotros": "About Us"
+}

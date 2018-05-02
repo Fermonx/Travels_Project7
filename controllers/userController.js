@@ -1,7 +1,6 @@
 let express = require('express');
 let router = express.Router();
 let bcrypt = require('bcrypt-nodejs');
-let userModel =require('../models/userModel');
 let usersModel = require('../models/sequelizeUserModel');
 let Email= require('../config/emailConf');
 let Hbs = require('nodemailer-express-handlebars');
@@ -10,9 +9,6 @@ let passport = require('passport');
 let localStrat = require('passport-local').Strategy;
 let userController = {};
 
-passport.serializeUser((user, done)=>{
-   done(null, user.id);
-});
 
 
 //REGISTRO DE USUARIO
@@ -52,7 +48,7 @@ userController.insert = function(req,res,next)
         "admin":0,
         "hash": hash
     };
-    usersModel.findOrCreate({where: {email: user.email},defaults:{password:user.password, admin: 0, active: 0, hash: user.hash}})
+    usersModel.findOrCreate({where: {email: user.email},defaults:{username: user.username, password:user.password, admin: 0, active: 0, hash: user.hash}})
         .spread((user, created)=>{
             if(created)
             {
@@ -104,8 +100,9 @@ userController.login = function(req, res, next)
     res.render('login', {
         title: 'G H T Login',
         layout: 'layout',
-        isAdmin: permisos,
-        isUser: sesion
+        mensaje : req.flash('mensajeError'),// Aqui recibimos el mensaje flash y lo guardamos en una variable
+        isAdmin: req.session.isAdmin, // recogemos la sesion creada
+        isUser: req.session.username // recogemos la sesion creada
     });
 };
 
@@ -123,75 +120,107 @@ userController.retrieve = function(req,res,next){
         "email": req.body.email,
         "pw": pswEnc
     };
+    usersModel.login(USERS,(error,usuario)=>{
+        if (error) next();
+        else {
+            if (!usuario){
+                req.flash('mensajeError','El email no existe! Intentelo de nuevo'); // Hacemos el mensaje flash que le llegara al login
+                res.redirect('/views/login'); // hacemos redirect al login , fijate en login arriba como recoges los mesajes flash
+            } else {
+                if (usuario.pw != USERS.pw){
+                    req.flash('mensajeError','La contraseña es incorrecta! Intentelo de nuevo');
+                    res.redirect('/views/login');
+                }else {
+                    req.session.username = usuario.username; // si todo es correcto , creamos la sesion
+                    req.session.isAdmin = usuario.admin; // si todo es correcto creamos la sesion
+                    res.redirect('/');
+                }
 
-    usersModel.findOne({where:{email: USERS.email},defaults:{password: USERS.pw}}).then(log=>{
-        if (log)
-        {
-            req.session.username = USERS.user;
-            res.redirect('/');
-        }
-        else
-        {
-            res.render('login',{
-                title:'GH Travels',
-                layout: 'layout',
-                loginIncorrecto: true
-            });
+            }
         }
     });
 };
 
+
+userController.logOut = function(req,res,next)
+{
+    if(!req.session.email){
+        next();
+    }else{
+        req.session.destroy();
+        res.redirect('/');
+    }
+};
+
 //PANEL ADMINISTRACION DE USUARIOS
 
-router.get('/userstable', function (req, res, next)
+
+userController.showUsersTable = function(req,res,next)
 {
-    if(permisos == 1)
-    {
-        userModel.fetchUsersT((error,retrieveUser)=>{
-            if(retrieveUser){
-                res.render('userstable.hbs', {
-                    title:'ADMIN VIEW',
-                    layout: 'layout',
-                    retrieveUser: retrieveUser
-                });
-            }
-        });
-    }
-});
-
-router.get('/userstable/deactivateUser/:id', (req, res, next)=>{
-    userModel.deactivateUser(req.params.id, (error, cb)=>{
-        if(error) res.status(500).json(error);
-        else res.redirect('/userstable');
-    })
-});
-
-
-
-
-router.get('/userstable/userDelete/:id', (req,res,next)=> {
-    userModel.userDelete(req.params.id,(error,cb)=>{
-        if(error) res.status(500).json(error);
-        else{
-            res.redirect('/userstable');
+    usersModel.findAll().then(retrieveUser=>{
+        if(retrieveUser)
+        {
+            res.render('userstable', {
+                title: 'ADMIN VIEW',
+                layout: 'layout',
+                retrieveUser: retrieveUser
+            });
         }
     })
-});
+};
 
-
-router.get('/recoverpw', (req,res,next)=>{
-
-});
-
-router.get('/userstable/deactivateUser/:id', (req, res, next)=>{
-    userModel.deactivateUser(req.params.id, (error, cb)=>{
-        if(error) res.status(500).json(error);
-        else res.redirect('/userstable');
+userController.userHide = function(req,res,next)
+{
+    let reqId = req.params.id;
+    usersModel.findOne({where:{id: reqId}}).then(activo=>{
+        if(activo)
+        {
+            if(activo.active == 1) activo.updateAttributes({active: 0});
+            else if(activo.active == 0) activo.updateAttributes({active: 1});
+        }
+        res.redirect('/admins/userstable');
     })
-});
+};
+
+
+userController.userDelete = function(req,res,next)
+{
+    let reqId = req.params.id;
+    usersModel.findOne({where:{id: reqId}}).then(usuario=>{
+        if(usuario) usuario.destroy();
+    }).then(()=>{
+        res.redirect('/admins/userstable');
+    })
+};
+
 
 
 module.exports = userController;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  //SESIONES

@@ -68,6 +68,7 @@
                             <hr>
                             <p>{{description}}</p>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -83,7 +84,7 @@
                 {{# each retrieveTravel}}
                     {{# if active}}
                         <div class="col-12 col-md-4 destinos-item is-showing">
-                            <div class="destino d-flex justify-content-between" style="background-image: url({{image}}); background-color: white; background-size: cover; background-position: center;">
+                            <div class="destino d-flex justify-content-between" style="background-image: url({{image}}); background-size: cover; background-position: center;">
                                 <div class="price d-flex align-items-center justify-content-center align-self-end">{{price}}€</div>
                                 <a class="back-heart" >
                                     <i class="heartt material-icons  material-heart2">favorite</i>
@@ -96,6 +97,8 @@
                                 </p>
                                 <h1>{{travel}}</h1>
                                 <p>{{description}}</p>
+                                <br/>
+                                <button type="button" class="btn btn-outline-info" href="/checkout/checkoutAdd/{{id}}">Añadir al Carrito</button>
                             </div>
                         </div>
                     {{/if}}
@@ -105,7 +108,7 @@
         </div>
     </div>
 
-<section class="overHidden">
+<section class="overHidden" id="nosotros">
     <div class="quienes-somos d-flex align-items-center">
         <div class="container d-flex justify-content-end">
             <div class="nosotros col-lg-5">
@@ -121,7 +124,7 @@
     </div>
 </section>
 
-<section>
+<section id="contacto">
     <div id="contact" class="contact">
         <div class="container container-destinos">
             <div class="row d-flex row-contact">

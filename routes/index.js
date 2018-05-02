@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const travelModel = require('../models/travelModel');
 var errorController = require('../controllers/errorController');
 let travelController = require('../controllers/travelController');
 
