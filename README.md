@@ -1,6 +1,8 @@
 # Project_7
 
-Seventh project for the Geekshubs Academy Bootcamp.
+(WIP)
+
+Seventh project for the Geekshubs Academy Bootcamp, done for the most part, still missing: shopping cart, improve the design and polish the code to make it clean and understandable.
 
 Functions to achieve this week:
 
